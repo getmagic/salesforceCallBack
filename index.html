@@ -8,5 +8,14 @@
       <p> Redirect URI </p>
     </body>
     <script src="jsforce.js"></script>
+    <script>
+jsforce.browser.init({
+  clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //client ID= consumer key of connected app
+  //redirectUri: 'authorization.html', //needs to match callback url in connected app. It also needs jsforce initialization
+  redirectUri: 'https://getmagic.github.io/salesforceCallBack/index.html',
+  proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
+});
+    </script>
+    
         
   </html>
