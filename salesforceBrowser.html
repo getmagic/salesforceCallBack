@@ -1,0 +1,137 @@
+
+  <html> 
+    <head> 
+      <title> Test Website </title>
+    </head>
+    <body> 
+      <p id="Hello"> Hello </p>
+
+      <form action="salesforceBrowser.html">  
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" value="siya@magic.com" required><br>
+
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password" value="2022magic" required><br>
+
+        <label for="securitytoken">Security Token:</label><br>
+        <input type="text" id="securitytoken" name="securitytoken"  value="SV314O4T4Dfy0e3h5fff23h46" required><br><br>
+        
+        <input type="button" onclick= "Login();" value="Submit">
+</form> 
+
+<p id="putInfoHere"> </p>
+
+    </body>
+
+<script src="jsforce.js"></script>
+
+
+<script>
+  
+jsforce.browser.init({
+  clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //client ID= consumer key of connected app
+
+  //redirectUri: 'authorization.html', //needs to match callback url in connected app. It also needs jsforce initialization
+  //redirectUri: 'https://getmagic.github.io/salesforceCallBack/index.html',
+  //redirectUri: 'https://login.salesforce.com/services/oauth2/callback',
+  redirectUri: 'file:///Users/skamboj2022/Downloads/Salesforce%20test%20website/Salesforce%20jsForce/authorization.html',
+  proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
+});
+
+// ...
+
+
+
+
+
+
+function Login(){
+
+
+  var username= document.getElementById("username").value;
+  var password= document.getElementById("password").value;
+  var sectoken= document.getElementById("securitytoken").value;
+ 
+
+  password=password+sectoken;
+
+/*
+  var conn = new jsforce.Connection({
+  oauth2 : {
+    // you can change loginUrl to connect to sandbox or prerelease env.
+    // loginUrl : 'https://test.salesforce.com',
+    clientId : '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX',
+    clientSecret : '193EBAB1AA78D7BD1BEF63295E1A4319ED2856AB178C6E79DFB082FF3AEA4055',
+    redirectUri: 'https://login.salesforce.com/services/oauth2/callback'
+  }
+});
+  console.log("Executed");
+conn.login(username, password, function(err, userInfo) {
+  if (err) { return console.error(err); }
+  // Now you can get the access token and instance URL information.
+  // Save them to establish connection next time.
+  var whatToWrite;
+  whatToWrite+= conn.accessToken + '<br>';
+  whatToWrite+= conn.instanceUrl + '<br>';
+  // logged in user property
+  whatToWrite+= "User ID: " + userInfo.id + '<br>';
+  whatToWrite+= "Org ID: " + userInfo.organizationId + '<br>';
+  //document.getElementById("putInfoHere").innerHTML= whatToWrite;
+  console.log(whatToWrite);
+  console.log("Hello");
+
+
+  // ...
+});*/
+jsforce.browser.login();
+}
+
+
+jsforce.browser.on('connect', function(conn) {
+  conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
+    if (err) { return handleError(err); }
+    handleResult(res);
+  });
+});
+
+
+  
+// /*
+//   jsforce.browser.login(username, password, function(err, userInfo) {
+//   if (err) { return console.error(err); }
+//   // Now you can get the access token and instance URL information.
+//   // Save them to establish connection next time.
+
+//   var whatToWrite;
+//   whatToWrite+= conn.accessToken + '<br>';
+//   whatToWrite+= conn.instanceUrl + '<br>';
+//   // logged in user property
+//   whatToWrite+= "User ID: " + userInfo.id + '<br>';
+//   whatToWrite+= "Org ID: " + userInfo.organizationId + '<br>';
+//   document.getElementById("putInfoHere").innerHTML= whatToWrite;
+//   // ...
+// });
+// */
+// //jsforce.browser.login();
+
+// }
+
+
+
+// /*
+
+// jsforce.browser.on('connect', function(conn) {
+//   conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
+//     if (err) { return handleError(err); }
+//     //handleResult(res);
+//     document.getElementById("Hello").innerHTML= res;
+//   });
+// });
+// */
+
+
+
+
+</script>
+
+  </html>
