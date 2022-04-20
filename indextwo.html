@@ -23,8 +23,10 @@ jsforce.browser.on('connect', function(conn) {
       /*if (err) { return handleError(err); }
       handleResult(res);*/
         if (err) { console.log(err); }
+        else{
       console.log(res);
       console.log("connection");
+        }//end of else
     });
   });
 
