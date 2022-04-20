@@ -11,9 +11,21 @@ jsforce.browser.init({
   proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
 });
 
+    /*
 jsforce.browser.on('connect', function(conn) { 
     alert();
-});
+});*/
+    
+    
+    jsforce.browser.on('connect', function(conn) {
+    console.log("connection1");
+    alert();
+    conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
+      if (err) { return handleError(err); }
+      handleResult(res);
+      console.log("connection");
+    });
+  });
 
 </script>
 </head>
