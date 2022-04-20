@@ -19,7 +19,6 @@ jsforce.browser.on('connect', function(conn) {
     
     jsforce.browser.on('connect', function(conn) {
     console.log("connection1");
-    alert();
     conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
       if (err) { return handleError(err); }
       handleResult(res);
