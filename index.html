@@ -56,8 +56,8 @@ function Login(){
   password=password+sectoken;
 
 
-  var conn = new jsforce.Connection({
-    /*
+  /*var conn = new jsforce.Connection({
+    
   oauth2 : {
     // you can change loginUrl to connect to sandbox or prerelease env.
     // loginUrl : 'https://test.salesforce.com',
@@ -66,7 +66,7 @@ function Login(){
     redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html'
   }
 });
-  console.log("Executed");*/
+  console.log("Executed");
 conn.login(username, password, function(err, userInfo) {
   if (err) { return console.error(err); }
   // Now you can get the access token and instance URL information.
@@ -81,39 +81,37 @@ conn.login(username, password, function(err, userInfo) {
 
   
  // jsforce.browser.login();
-}
+}*/
 
 
-jsforce.browser.on('connect', function(conn) {
-  conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
-    if (err) { return handleError(err); }
-    handleResult(res);
-    console.log("connection");
-  });
-});
 
 
   
-// /*
-//   jsforce.browser.login(username, password, function(err, userInfo) {
-//   if (err) { return console.error(err); }
-//   // Now you can get the access token and instance URL information.
-//   // Save them to establish connection next time.
-
-//   var whatToWrite;
-//   whatToWrite+= conn.accessToken + '<br>';
-//   whatToWrite+= conn.instanceUrl + '<br>';
-//   // logged in user property
-//   whatToWrite+= "User ID: " + userInfo.id + '<br>';
-//   whatToWrite+= "Org ID: " + userInfo.organizationId + '<br>';
-//   document.getElementById("putInfoHere").innerHTML= whatToWrite;
-//   // ...
-// });
-// */
+// 
+  jsforce.browser.login(username, password, function(err, userInfo) {
+  if (err) { return console.error(err); }
+  // Now you can get the access token and instance URL information.
+  // Save them to establish connection next time.
+  console.log("Access Token: " + conn.accessToken);
+  console.log("Instance URL: " + conn.instanceUrl);
+  // logged in user property
+  console.log("User ID: " + userInfo.id);
+  console.log("Org ID: " + userInfo.organizationId);
+  // ...
+});
+// 
 // //jsforce.browser.login();
 
 // }
 
+  jsforce.browser.on('connect', function(conn) {
+    conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
+      if (err) { return handleError(err); }
+      handleResult(res);
+      console.log("connection");
+    });
+  });
+}; //end of Login Function
 
 
 // /*
