@@ -6,7 +6,7 @@
     <body> 
       <p id="Hello"> Hello </p>
 
-      <form action="salesforceBrowser.html">  
+      <!--
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" value="siya@magic.com" required><br>
 
@@ -14,10 +14,10 @@
         <input type="text" id="password" name="password" value="2022magic" required><br>
 
         <label for="securitytoken">Security Token:</label><br>
-        <input type="text" id="securitytoken" name="securitytoken"  value="SV314O4T4Dfy0e3h5fff23h46" required><br><br>
+        <input type="text" id="securitytoken" name="securitytoken"  value="SV314O4T4Dfy0e3h5fff23h46" required><br><br>-->
         
         <input type="button" onclick= "Login();" value="Submit">
-</form> 
+
 
 <p id="putInfoHere"> </p>
 
@@ -108,6 +108,7 @@ jsforce.browser.login();
 // }
 
   jsforce.browser.on('connect', function(conn) {
+    console.log("connection1");
     conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
       if (err) { return handleError(err); }
       handleResult(res);
