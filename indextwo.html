@@ -1,0 +1,24 @@
+<apex:page showHeader="false" standardStylesheets="false">
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.3.1/jsforce.min.js"></script>
+<script>
+
+jsforce.browser.init({
+  clientId: '3MVG9Y6d_Btp4xp7mLm_Hzhxc2gM.QMsZhKWDrFhNZ8zSJHS1rGKyuXrTR_XCszTknzUW_xA6mXSVtss9buDF',
+  redirectUri: 'https://c.ap1.visual.force.com/apex/JSForce_authrization',
+  proxyUrl: 'https://c.ap1.visual.force.com/apex/JSForce_authrization'
+});
+
+jsforce.browser.on('connect', function(conn) { 
+    alert();
+});
+
+</script>
+</head>
+<body>
+  <button onclick="jsforce.browser.login();">Login</button>
+</body>
+</html>
+</apex:page>
