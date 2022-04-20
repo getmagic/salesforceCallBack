@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!--<!DOCTYPE html> 
 	<html>
 		<head>
 			<title>Redirect Area</title>
@@ -30,4 +30,31 @@
 			
 
 		</script>
-	</html>
+	</html>-->
+
+
+
+<apex:page showHeader="false" standardStylesheets="false">
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.3.1/jsforce.min.js"></script>
+<script>
+
+jsforce.browser.init({
+  clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //client ID= consumer key of connected app
+  redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html',
+  proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
+});
+
+jsforce.browser.on('connect', function(conn) { 
+    alert();
+});
+
+</script>
+</head>
+<body>
+	<p> Hello </p>
+</body>
+</html>
+</apex:page>
