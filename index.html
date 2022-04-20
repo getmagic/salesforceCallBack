@@ -57,6 +57,7 @@ function Login(){
 
 
   var conn = new jsforce.Connection({
+    /*
   oauth2 : {
     // you can change loginUrl to connect to sandbox or prerelease env.
     // loginUrl : 'https://test.salesforce.com',
@@ -64,27 +65,17 @@ function Login(){
     clientSecret : '193EBAB1AA78D7BD1BEF63295E1A4319ED2856AB178C6E79DFB082FF3AEA4055',
     redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html'
   }
-});
+});*/
   console.log("Executed");
 conn.login(username, password, function(err, userInfo) {
   if (err) { return console.error(err); }
   // Now you can get the access token and instance URL information.
   // Save them to establish connection next time.
- // var whatToWrite;
   console.log("Access Token: " + conn.accessToken);
   console.log("Instance URL: " + conn.instanceUrl);
-  /*whatToWrite+= conn.accessToken + '<br>';
-  whatToWrite+= conn.instanceUrl + '<br>';*/
   // logged in user property
   console.log("User ID: " + userInfo.id);
   console.log("Org ID: " + userInfo.organizationId);
-  /*whatToWrite+= "User ID: " + userInfo.id + '<br>';
-  whatToWrite+= "Org ID: " + userInfo.organizationId + '<br>';*/
-  //document.getElementById("putInfoHere").innerHTML= whatToWrite;
-  //console.log(whatToWrite);
-  //console.log("Hello");
-
-
   // ...
 });
 
