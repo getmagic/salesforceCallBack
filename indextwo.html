@@ -24,7 +24,8 @@ jsforce.browser.on('connect', function(conn) {
       handleResult(res);*/
         if (err) { console.log(err); }
         else{
-      document.getElementById("Result").innerHTML=  res[0].firstName__c;
+      //document.getElementById("Result").innerHTML=  res[0].firstName__c;
+            console.log(res);
       console.log("connection");
         }//end of else
     });
