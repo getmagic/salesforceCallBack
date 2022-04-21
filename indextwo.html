@@ -22,10 +22,39 @@ jsforce.browser.on('connect', function(conn) {
     alert();
 });*/
     
-    
     jsforce.browser.on('connect', function(conn) {
+        console.log("connection1");
         document.getElementById("myForm").style.display="block";
-    console.log("connection1");
+      });
+                       
+                       
+                   
+    /*
+  function AddData(){
+        //Add your information into the database
+    conn.sobject("MAGICMenteeProjects__c").create(
+    {
+      firstName__c : document.getElementsByName("fname")[0].value , 
+      year__c : document.getElementsByName("year")[0].value , 
+      projectDescription__c: document.getElementsByName("projectdesc")[0].value,
+      projectSummary__c : document.getElementsByName("projectsumm")[0].value, 
+      lastName__c: document.getElementsByName("lname")[0].value, 
+      additionalDescription__c: document.getElementsByName("addDesc")[0].value, 
+      menteeMentorRelationship__c: document.getElementsByName("menteeMentorRelat")[0].value,
+    }, function (error, result) {
+      if (error) {
+        console.log(error);
+      }
+      else {
+        console.log("The resulting id of the created project is " + result.id);
+        //res.end();
+      }
+    }); //end of conn.sobject create
+  };// end of Add Data*/
+  
+        
+        
+        
         /*
     conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
       
@@ -53,7 +82,8 @@ jsforce.browser.on('connect', function(conn) {
      <input name="addDesc" type="text" placeholder="Additional Description" required/> <br>
      <input name="menteeMentorRelat" type="text" placeholder="Mentee Mentor Relationship" required/> <br>
      
-     <br> <button type="submit">Submit</button>
+    <!-- <br> <button type="submit" onclick="AddData();">Submit</button>-->
+        <br> <button type="submit">Submit</button>
     </form>
 </body>
 </html>
