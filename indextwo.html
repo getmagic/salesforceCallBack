@@ -24,7 +24,7 @@ jsforce.browser.on('connect', function(conn) {
       handleResult(res);*/
         if (err) { console.log(err); }
         else{
-      console.log(res);
+      document.getElementById("Result").innerHTML=  handleResult(res);
       console.log("connection");
         }//end of else
     });
@@ -34,6 +34,7 @@ jsforce.browser.on('connect', function(conn) {
 </head>
 <body>
   <button onclick="jsforce.browser.login();">Login</button>
+    <p id="Result"> </p>
 </body>
 </html>
 </apex:page>
