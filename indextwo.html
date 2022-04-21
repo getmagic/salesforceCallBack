@@ -40,11 +40,12 @@ jsforce.browser.on('connect', function(conn) {
               menteeMentorRelationship__c: document.getElementsByName("menteeMentorRelat")[0].value,
             }, function (error, result) {
               if (error) {
-                console.log(error);
+                  document.getElementById("writeError").innerHTML= "There was an error adding this project to the database.";
+                  console.log(error);
               }
               else {
-                console.log("The resulting id of the created project is " + result.id);
-                //res.end();
+                document.getElementById("writeError").innerHTML= "This project was succesfully uploaded. The resulting id is " + result.id;
+               
               }
             }); //end of conn.sobject create
         });//end of addEventListener function
@@ -134,6 +135,7 @@ jsforce.browser.on('connect', function(conn) {
      <input name="menteeMentorRelat" type="text" placeholder="Mentee Mentor Relationship" required/> <br>
      
      <br> <button id="submit">Submit</button>
+        <p id="writeError"></p>
         <!--<br> <button type="submit">Submit</button>-->
     </div>
 </body>
