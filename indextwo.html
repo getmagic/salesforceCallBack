@@ -29,8 +29,9 @@ jsforce.browser.on('connect', function(conn) {
                        
                        
                    
-    /*
+    
   function AddData(){
+      jsforce.browser.on('connect', function(conn) {
         //Add your information into the database
     conn.sobject("MAGICMenteeProjects__c").create(
     {
@@ -50,7 +51,8 @@ jsforce.browser.on('connect', function(conn) {
         //res.end();
       }
     }); //end of conn.sobject create
-  };// end of Add Data*/
+          });//end of on connect
+  };// end of Add Data
   
         
         
@@ -82,8 +84,8 @@ jsforce.browser.on('connect', function(conn) {
      <input name="addDesc" type="text" placeholder="Additional Description" required/> <br>
      <input name="menteeMentorRelat" type="text" placeholder="Mentee Mentor Relationship" required/> <br>
      
-    <!-- <br> <button type="submit" onclick="AddData();">Submit</button>-->
-        <br> <button type="submit">Submit</button>
+     <br> <button type="submit" onclick="AddData();">Submit</button>
+        <!--<br> <button type="submit">Submit</button>-->
     </form>
 </body>
 </html>
