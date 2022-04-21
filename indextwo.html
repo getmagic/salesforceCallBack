@@ -25,7 +25,7 @@ jsforce.browser.on('connect', function(conn) {
     jsforce.browser.on('connect', function(conn) {
         console.log("connection1");
         document.getElementById("myForm").style.display="block";
-        document.getElementById("submit").addEventListener("click", AddData);
+        document.getElementById("submit").addEventListener("click", AddData(conn));
         /*
         document.getElementById("submit").addEventListener("click", function(){
             document.getElementById("submit").disabled = true; //make submit button unclickable
@@ -81,7 +81,7 @@ jsforce.browser.on('connect', function(conn) {
           });//end of on connect
   };// end of Add Data*/
   
-    function AddData(){
+    function AddData(conn){
             document.getElementById("submit").disabled = true; //make submit button unclickable
             console.log("Post form, connection"); 
             //Add your information into the database
