@@ -18,17 +18,18 @@ jsforce.browser.on('connect', function(conn) {
     
     
     jsforce.browser.on('connect', function(conn) {
+        document.getElementById("myForm").style.display="block";
     console.log("connection1");
+        /*
     conn.query('SELECT Id, firstName__c FROM MAGICMenteeProjects__c', function(err, res) {
-      /*if (err) { return handleError(err); }
-      handleResult(res);*/
+      
         if (err) { console.log(err); }
         else{
       console.log(res[0].firstName__c);
             //console.log(res);
-      console.log("connection");
+      console.log("connection2");
         }//end of else
-    });
+    });*/
   });
 
 </script>
@@ -36,6 +37,18 @@ jsforce.browser.on('connect', function(conn) {
 <body>
   <button onclick="jsforce.browser.login();">Login</button>
     <p id="Result"> </p>
+    
+    <form id="myForm" style="display:none;"> 
+     <input name="fname" type="text" placeholder="First Name" required/> <br>
+     <input name="lname" type="text" placeholder="Last Name" required/> <br>
+     <input name="year" type="text" placeholder="Year you were a mentee" required/> <br>
+     <input name="projectdesc" type="text" placeholder="Project Description" required/> <br>
+     <input name="projectsumm" type="text" placeholder="Project Summary" required/> <br>
+     <input name="addDesc" type="text" placeholder="Additional Description" required/> <br>
+     <input name="menteeMentorRelat" type="text" placeholder="Mentee Mentor Relationship" required/> <br>
+     
+     <br> <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
 </apex:page>
