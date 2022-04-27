@@ -25,6 +25,7 @@ jsforce.browser.on('connect', function(conn) {
     jsforce.browser.on('connect', function(conn) {
         console.log("connection1");
         document.getElementById("myForm").style.display="block";
+        /*
         document.getElementById("submit").addEventListener("click", function(){
             document.getElementById("submit").disabled = true; //make submit button unclickable
             console.log("Post form, connection"); 
@@ -48,15 +49,16 @@ jsforce.browser.on('connect', function(conn) {
                
               }
             }); //end of conn.sobject create
-        });//end of addEventListener function
+        });//end of addEventListener function*/
+        document.getElementById("submit").addEventListener("click", AddData(conn));
       }); //end of on connect
                        
                        
                    
-    /*
-  function AddData(){
+    
+  function AddData(conn){
       console.log("ADD DATA CALLED");
-      jsforce.browser.on('connect', function(conn) {
+      
           console.log("Post form, connection");
         //Add your information into the database
     conn.sobject("MAGICMenteeProjects__c").create(
@@ -77,8 +79,8 @@ jsforce.browser.on('connect', function(conn) {
         //res.end();
       }
     }); //end of conn.sobject create
-          });//end of on connect
-  };// end of Add Data*/
+         
+  };// end of Add Data
   
     /*
     function AddData(conn){
