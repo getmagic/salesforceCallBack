@@ -14,7 +14,7 @@
     <body>
         <form>
             <input type="file" id="fileInput"/>
-            <input type="button" value="Submit" onclick= "uploadFile();">
+            <input type="button" value="Submit" id="submit">
         </form>
     </body>
   
@@ -45,7 +45,8 @@ jsforce.browser.on('connect', function(conn) {
         /**
          * Uses Chatter REST API to upload files up to 2GB.
          */
-        function uploadFile() {
+        //function uploadFile() {
+      document.getElementById("submit").addEventListener("click", function(){
 
             // ... show waiting indicator
           
@@ -68,7 +69,7 @@ jsforce.browser.on('connect', function(conn) {
 
         }
 
-        
+        });
             }); //end of on connect
 
         /**
