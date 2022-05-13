@@ -17,15 +17,8 @@
   
 <script>
   
-  var Element = document.querySelector('input');
-    var img = document.querySelector('img');
-    Element.addEventListener('change', function() {
-      var url = URL.createObjectURL(Element.files[0]);
-      img.src = url;
-      console.log(url);
-      var d=document.querySelector(".p");
-      d.textContent+=url;
-});
+  
+  console.log("about to initialize");
   
     jsforce.browser.init({
         clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //client ID= consumer key of connected app
@@ -35,7 +28,16 @@
   
   jsforce.browser.on('connect', function(conn) { 
     alert("connection!");
-    console.log(url);
+    var Element = document.querySelector('input');
+    var img = document.querySelector('img');
+    Element.addEventListener('change', function() {
+      var url = URL.createObjectURL(Element.files[0]);
+      img.src = url;
+      console.log(url);
+      var d=document.querySelector(".p");
+      d.textContent+=url;
+});
+
 });
   
     
