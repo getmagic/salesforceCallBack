@@ -17,7 +17,8 @@
     });
     
     jsforce.browser.on('connect', function(conn) {
-        alert("connection!");
+        console.log("connection! and moveNext called");
+        moveNext(this);
         /*
        document.getElementById("myForm").style.display="block";
         
