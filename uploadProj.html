@@ -16,12 +16,11 @@
     // proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
     });
     
-    $("#login").click(function(){
     jsforce.browser.on('connect', function(conn) {
         console.log("connection! and moveNext called");
         //moveNext(this);
       if ($(document.getElementById('no1')).is(":visible")){ //if we are on the first fieldsset
-          moveNext(this);
+          console.log("We should be in fieldset 2");
       };
         /*
        document.getElementById("myForm").style.display="block";
