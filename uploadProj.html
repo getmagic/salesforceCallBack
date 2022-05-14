@@ -16,11 +16,12 @@
     // proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
     });
     
+    $("#login").click(function(){
     jsforce.browser.on('connect', function(conn) {
         console.log("connection! and moveNext called");
         //moveNext(this);
       if ($(document.getElementById('no1')).is(":visible")){ //if we are on the first fieldsset
-          moveNext('$no1');
+          moveNext(this);
       };
         /*
        document.getElementById("myForm").style.display="block";
@@ -51,6 +52,7 @@
         });//end of addEventListener function
        */
       }); //end of on connect
+      }); //end of first click.function
                        
                        
                    
@@ -95,7 +97,7 @@
         <input type="email" placeholder="Email" id="email" />
         <input type="password" placeholder="Password" id="password" />-->
        <p class="errorMessage" id="errorMessage1"> </p>
-       <button type="button" onclick="jsforce.browser.login();" class="action-button">Sign In </button>
+       <button type="button" onclick="jsforce.browser.login();" id="login" class="action-button">Sign In </button>
       </fieldset>
 
 
