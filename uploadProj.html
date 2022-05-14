@@ -18,7 +18,10 @@
     
     jsforce.browser.on('connect', function(conn) {
         console.log("connection! and moveNext called");
-        moveNext(this);
+        //moveNext(this);
+      if ($(document.getElementById('no1')).is(":visible")){ //if we are on the first fieldsset
+          moveNext('$no1');
+      };
         /*
        document.getElementById("myForm").style.display="block";
         
