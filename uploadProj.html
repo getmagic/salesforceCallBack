@@ -1,0 +1,302 @@
+<apex:page showHeader="false" standardStylesheets="false">
+<html>
+<head>
+  <title> MAGIC Upload Mentee Project </title>
+  <link rel="Stylesheet" href="uploadProjAndLoginForm.css"/>
+
+  <script src="jquery-2.1.4.min.js"></script>
+  <script src="uploadSalesforce.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.3.1/jsforce.min.js"></script>
+  <script>
+
+    jsforce.browser.init({
+      clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //client ID= consumer key of connected app
+      redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html',
+    // proxyUrl: 'https://your-jsforce-proxy-server.herokuapp.com/proxy/'
+    });
+    
+    jsforce.browser.on('connect', function(conn) {
+        alert("connection!");
+        /*
+       document.getElementById("myForm").style.display="block";
+        
+        document.getElementById("submit").addEventListener("click", function(){
+            document.getElementById("submit").disabled = true; //make submit button unclickable
+            console.log("Post form, connection"); 
+            //Add your information into the database
+            conn.sobject("MAGICMenteeProjects__c").create(
+            {
+              firstName__c : document.getElementsByName("fname")[0].value , 
+              year__c : document.getElementsByName("year")[0].value , 
+              projectDescription__c: document.getElementsByName("projectdesc")[0].value,
+              projectSummary__c : document.getElementsByName("projectsumm")[0].value, 
+              lastName__c: document.getElementsByName("lname")[0].value, 
+              additionalDescription__c: document.getElementsByName("addDesc")[0].value, 
+              menteeMentorRelationship__c: document.getElementsByName("menteeMentorRelat")[0].value,
+            }, function (error, result) {
+              if (error) {
+                  document.getElementById("writeError").innerHTML= "There was an error adding this project to the database.";
+                  console.log(error);
+              }
+              else {
+                document.getElementById("writeError").innerHTML= "This project was succesfully uploaded. The resulting id is " + result.id;
+               
+              }
+            }); //end of conn.sobject create
+        });//end of addEventListener function
+       */
+      }); //end of on connect
+                       
+                       
+                   
+    
+
+</script>
+
+</head>
+   <!--
+    Places where there is a pop-up: 
+      Fieldset no 3
+        - Project Description (in 3rd person)
+        - Mentee Relationship (with mentor) in 3rd person
+        - Project summary
+      Fieldset no 4
+        - 1 photo thumbnail
+        - 4 photos project
+        - 2 photos of ur code
+        - All of ur codes files and a readme-->
+  <body onload="addYearDropdown();addCheckBoxLanguage();addPopUps();">
+    <!-- multistep form -->
+    <form id="uploadProjForm" enctype="multipart/form-data" name="myForm" class="msform"> 
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li class="active">Log In</li>
+        <li>Personal Information</li>
+        <li>Project Information and Reflection</li> 
+        <li>File Uploads</li> 
+        <li>Upload Progress</li>
+      </ul>
+      <!-- fieldsets -->
+      <p style="color:#fdc58b;"> For questions about what to write in your website, please go to <a target="_blank" href="https://getmagic.github.io/ProjectTemplate.html?AbrMdvk0spTWTW795ABM" style="color: #fff9f0;">this website</a>  </p> <br> <!--maybe make another file as a website (that is not in the array and is not present on the official website) which will be more informational and explanatory -->
+      <p style="color:#fdc58b;"> Do not refresh or you will lose all your progress</p> <br>
+
+     <mark> <p style="color:white;" id="UploadProgress"></p>  </mark> <br>
+
+      <fieldset id="no1">
+        <p style="color:#4800009e;">This page is a LOG IN for MAGIC Mentee Project Uploads. If you are not a mentee, please go to <a href="https://getmagic.org" style="color: gray;">this link</a> to learn more about MAGIC </p> <br>
+        <h1 class="fs-title"> Log In </h1>
+        <h3 class="fs-subtitle">Please contact your mentor if you do not have the login information</h3>
+        <!--
+        <input type="email" placeholder="Email" id="email" />
+        <input type="password" placeholder="Password" id="password" />-->
+       <p class="errorMessage" id="errorMessage1"> </p>
+       <button type="button" onclick="jsforce.browser.login();" class="next action-button">Sign In </button>
+      </fieldset>
+
+
+      
+      <fieldset id="no2">
+        <h2 class="fs-title">Personal Information</h2>
+        <h3 class="fs-subtitle">Please click the question button for examples or clarification</h3>
+        <input id="FirstName" class="required" type="text" name="First-Name" placeholder="First Name"/>
+        <input id="LastName" class="required" type="text" name="Last-Name" placeholder="Last Name"/>
+        <label class="labelForSelectOrInput" style="float: none;" for="year">Year when you were a mentee: </label>
+          <select id="Year-When-you-Were-A-Mentee" class="required" name="Year-when-you-were-a-mentee" placeholder="Year">
+            <!--This is where addYearDropdown() is appended -->
+           <option value=""></option>
+          </select>
+          <br>
+        <label class="labelForSelectOrInput" style="float: none;" for="grade">Grade Level when you were a mentee: </label>
+          <select id="Grade-When-you-Were-A-Mentee" class="required" name="Grade-Level-when-you-were-a-mentee" placeholder="Grade Level">
+            <option value=""></option>
+            <option value="6th">6th</option>
+            <option value="7th">7th</option>
+            <option value="8th">8th</option>
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+            <option value="11th">11th</option>
+            <option value="12th">12th</option>
+          </select>
+        <br>
+        <p class="errorMessage" id="errorMessage2"> </p>
+        <!--<button type="button" class="next action-button"> Next </button>
+      </fieldset>
+  
+      
+      <fieldset id="no3">
+        <h2 class="fs-title">Project Information and Reflection</h2>
+        <h3 class="fs-subtitle">Please click the question button for examples or clarification</h3>
+
+        <div id="FormTags">
+          <h2 class="fs-title">Please select all applicable tags for your project.</h2>
+          <p class="titlequest" style="color:#af7a7a;"> If you select "other" and add additional tags, please separate each new tag with commas ie Scratch Project, Robotics </p>  <br>
+          <input type="button" value="Hardware">
+          <input type="button" value="Software">
+          <input type="button" value="Website">
+          <input type="button" value="App">
+          <input type="button" value="Research">
+          <input type="button" value="Science">
+          <input type="button" value="Biology">
+          <input type="button" value="Chemistry">
+          <input type="button" value="Physics">
+          <input type="button" value="Math">
+          <input type="button" value="Other">
+          <input class="required regularinput" style="display: none; padding: 3px;" id="specifymore1" type="text" name="Specify-Additional-Tags" placeholder="Please specify additional tags">
+        </div>
+
+        <div id="whenWebSelected" style="display:none;">
+          <label class="titlequest" for="webask">Is your project's code on github? </label> <br>
+          <div class="alignradiobuttons" >
+            <input class="required radiobutton" id="gitweb" type="radio" name="Whether-Project-Is-On-GitHub" value="Yes" >
+            <label class="labelForSelectOrInput" for="Yes">Yes</label><br>
+          </div>-->
+            <!--exclude this from div "alignradiobuttons" so that it is left-aligned-->
+           <!-- <input class="required regularinput" id="receivegithublink" style="display: none; padding:3px" type="text" name="The-Link-To-Your-GitHub-Code" placeholder="Please paste the link to your github code repository."/>
+
+          <div class="alignradiobuttons" > 
+            <input class="required radiobutton" id="nogitweb" type="radio" name="Whether-Project-Is-On-GitHub" value="No" >
+            <label class="labelForSelectOrInput" for="No">No</label><br>
+          </div>
+        </div>
+
+
+         <div id="CodeToUpload">
+          <label class="titlequest" for="webask">Do you have any code you want to upload? </label> <br>
+          <div class="alignradiobuttons">
+            <input class="required radiobutton" id="YesCodeUpload" type="radio" name="Whether-You-Have-Code-To-Upload" value="Yes" >
+            <label class="labelForSelectOrInput" for="Yes">Yes</label><br>
+            <input class="required radiobutton" id="NoCodeUpload" type="radio" name="Whether-You-Have-Code-To-Upload" value="No" >
+            <label class="labelForSelectOrInput" for="No">No</label><br>
+          </div>
+        </div>
+
+        <div id="checkBoxLang" style="display:none;">
+          <label for="langtype" class="titlequest">Languages Used: </label> <br>
+          <div id="checkBoxLangInterior" class="alignradiobuttons">-->
+            <!--This is where addCheckBoxLanguage() appends the Language checkboxes -->
+          <!--</div> -->
+          <!--This is where addCheckBoxLanguage() appends the "Specify Languages Used" text box -->
+       <!-- </div>
+
+        <div id="ProjectDescription">
+          <label for="projectdec" class="titlequest"> Please describe your project in 3rd person (100 words): </label>
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div> 
+          <br>
+          <p class="titlequest" style="color:red;">Number of words Left: <span id="no1span">100 </span></p>
+          <textarea  class="textareaadd required" name="Project-Description" id="projectdec" onkeydown="wordLimit(this.id, 'no1span', 100);" onpaste="return false;" placeholder="Please write here"></textarea>
+        </div>
+
+        <div id="MenteeMentorDescription">
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div>
+          <label for="menteedec" class="titlequest"> Please describe your relationship with your mentor in 3rd person (100 words): </label> <br>
+          <p class="titlequest" style="color:red;">Number of words Left: <span id="no2span">100 </span></p>
+          <textarea  class="textareaadd required" name="Mentee-Relationship-Description" id="menteedec" onkeydown="wordLimit(this.id, 'no2span', 100);" onpaste="return false;" placeholder="Please write here"></textarea>
+        </div>
+
+        <div id="ProjectSummaryDescription">
+          <label for="Project Summary" class="titlequest"> Please describe your project in one sentence: </label> <br>
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div> 
+          <p class="titlequest"> (NOTE: This will go under your name on the website) </p>
+          <p class="titlequest" style="color:red;">Number of words Left: <span id="no3span">20 </span></p>
+          <input type="text" class="required regularinput" name="Project-Summary" id="projsummary" placeholder="Project Summary" onpaste="return false;" onkeydown="wordLimit(this.id, 'no3span', 20);" />
+        </div>
+
+        <div id="NonWebsiteDescription" style="display:none;">
+          <label for="Description-Of-NonWebsite-Project" class="titlequest"> Please describe where to find your project (if it is available on the app store for example), How your project works, etc : </label>
+           <p class="titlequest" style="color:red;">Number of words Left: <span id="no4span">200 </span></p>
+          <textarea  class="textareaadd required" name="Description-Of-NonWebsite-Project" id="Description-Of-NonWebsite-Project" placeholder="Please write here" onpaste="return false;" onKeyDown="wordLimit(this.id, 'no4span', 200);"></textarea>
+        </div>
+
+        <div id="UploadInterviewLink">
+          <label class="titlequest" for="Interview Link">Please embed your interview link below:</label>
+            <p class="titlequest"> (NOTE: Please see the video below for how to upload your interview) </p> 
+            <p class="titlequest" style="color:#af7a7a;">If your interview is not uploaded on youtube, then you can leave this step blank.</p><br>
+            <video width="350" height=auto controls>
+              <source src="images/Tutorial_Interview_Upload.mov" type="video/mp4">
+              Your browser does not support HTML video. Go to MAGIC'S official youtube channel (getMagic .org), find your interview, click share, click embed, paste the link within the " " after "src=".
+            </video>
+            <input type="url" class="regularinput" id="InterviewLink" name="Interview-Link" placeholder="Paste your interview link here">
+            <p id="InterviewLinkValidation"></p><br>
+        </div>
+
+        <div id="UploadPresentationLink">
+          <label class="titlequest" for="Presentation Link">Please embed your presentation link below:</label>
+            <p class="titlequest"> (NOTE: Please see the video above for how to upload your presentation) </p> 
+            <p class="titlequest" style="color:#af7a7a;">If your presentation is not uploaded on youtube, then you can leave this step blank.</p><br>
+            <input type="url" class="regularinput" id="PresentationLink" name="Presentation-Link" placeholder="Paste your presentation link here">
+            <p id="PresentationLinkValidation"></p><br>
+        </div>
+         <p class="errorMessage" id="errorMessage3"> </p>
+        <button type='button' class="previous action-button"> Previous </button>
+        <button type="button" class="next action-button"> Next </button>
+      </fieldset> 
+
+
+      <fieldset id="no4">
+        <h2 class="fs-title">File Uploads</h2>
+        <h2 class="fs-subtitle" style="color:red; margin-bottom: 4px;">All photos must end with .png</h2>
+        <h2 class="fs-subtitle" style="margin-bottom: 10px;"><strong>Tip:</strong> Use the Control or the Shift key to select multiple files. </h2>
+
+        <div id="Upload1Thumbnail">
+          <label class="titlequest" for="thumbnailFile">1. Please upload 1 photo as a thumbnail</label>
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div> 
+          <input type="file" accept="image/*" name="ThumbnailPhoto[]" class="fileUploadInput" id="onethumbnailimage" onchange="getFileInfo(this.id, 'ThumbnailUploadInfo', 1)" required>
+          <br>
+          <p class="fileUploadName" id="ThumbnailUploadInfo"> </p>
+          <br>
+        </div>
+
+        <div id="Upload4ProjectPhotos">
+          <label class="titlequest" for="imageCarousFile">2. Please upload upto 4 photos of your project</label>
+          <p class="titlequest"> (NOTE: It is best to upload exactly 4 photos) </p> 
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div> 
+          <input type="file" accept="image/*" name="FourProjectPhotos[]" class="fileUploadInput" id="fourexamplephotos" onchange="getFileInfo(this.id, 'ExamplePhotosInfo', 4)" multiple required>
+          <br>
+          <p class="fileUploadName" id="ExamplePhotosInfo"> </p>
+          <br>
+        </div>
+
+        <div id="Upload2CodePhotos">
+          <label class="titlequest" for="imagesOfCode">3. Please upload upto 2 photos of your code </label>
+           <p class="titlequest"> (NOTE: It is best to upload exactly 2 photos) </p> 
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div> 
+          <input type="file" accept="image/*" name="TwoImagesOfCode[]" class="fileUploadInput" id="twocodeimages" onchange="getFileInfo(this.id, 'CodePhotsInfo', 2)" multiple >
+          <br>
+          <p class="fileUploadName" id="CodePhotsInfo"> </p>
+          <br>
+        </div>
+
+        <div id="UploadCodeFiles">
+          <label class="titlequest" for="FilesOfCode">4. Please upload one zipped file (which contains all of your code files and a ReadMe that describes your project) </label>
+          <div class="popup" onclick="displayPopUpImage(this.id);"> </div> 
+          <input type="file" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" name="Uploaded-Code-Files" class="fileUploadInput" id="uploadcode" onchange="getFileInfo(this.id, 'CodeFilesInfo', 1)">
+          <br>
+          <p class="fileUploadName" id="CodeFilesInfo"> </p>
+          <br>
+        </div>
+
+        <button type='button' class="previous action-button"> Previous </button>-->
+       
+       <button type='submit' id='submit-btn' class="action-button"> Submit </button>
+      </fieldset>
+
+   <fieldset id="no5">
+        <h2 class="fs-title">If you get the alert that all your files have been succesfully uploaded, you can safely navigate to <!--<a href="allProjects.html" id="LinkForRedirection">this</a> website to see your project.</h2>--> <a id="LinkForRedirection">this</a> website to see your project.</h2>
+        <h3 class="fs-subtitle">Please email your mentor if you see any error messages.</h3>
+       <!-- <button type='button' class="previous action-button"> Previous DEL LATER </button>-->
+    </fieldset> 
+        
+    </form>
+  
+  <!--<script src="js/jquery-2.1.4.min.js"></script>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+  <script src="js/Firestore uploadProj.js"></script> -->
+</body>
+</html>
+
+
+
+</apex:page>
