@@ -29,7 +29,8 @@
   
   jsforce.browser.on('connect', function(conn) { 
     alert("connection!");
-    var filename="Blob";
+    var fileName="Blob";
+    var fileType = 'image/jpeg';
     var Element = document.querySelector('input');
     var img = document.querySelector('img');
     Element.addEventListener('change', function() {
@@ -43,10 +44,11 @@
                 ParentId: 'a008c00000aF20pAAC', //id of mentee project where u want to upload file???? //touching Fremont rn
                 Name : fileName,
                 Body: base64data,
-                ContentType : fileType,  
-            }, 
-            function(err, uploadedAttachment) {
-                console.log(err,uploadedAttachment);
+                ContentType : fileType, 
+              }
+            //},
+         //   function(err, uploadedAttachment) {
+               // console.log(err,uploadedAttachment);
        }); //end of conn.sobject('Attachment')
 });
 
