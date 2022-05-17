@@ -39,11 +39,11 @@
       console.log(url);
       var d=document.querySelector(".p");
       d.textContent+=url;
-      var base64data = Buffer.from(url).toString('base64');
+      //var base64data = Buffer.from(url).toString('base64');
       conn.sobject('Attachment').create({ //Uploads this into the attachments section of the id of the desired project 
                 ParentId: 'a008c00000aF20pAAC', //id of mentee project where u want to upload file???? //touching Fremont rn
                 Name : fileName,
-                Body: base64data,
+                Body: url,
                 ContentType : fileType, 
               });
             //},
