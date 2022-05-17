@@ -39,12 +39,19 @@
       console.log(url);
       var d=document.querySelector(".p");
       d.textContent+=url;
-      var fileToUpload= base64Encode(url);
+      //var fileToUpload= base64Encode(url);
+      
+      var reader = new FileReader();
+      reader.readAsDataURL(url); 
+      reader.onloadend = function() {
+      var base64data = reader.result;                
+      console.log(base64data);
+
       //var base64data = Buffer.from(url).toString('base64');
       conn.sobject('Attachment').create({ //Uploads this into the attachments section of the id of the desired project 
                 ParentId: 'a008c00000aF20pAAC', //id of mentee project where u want to upload file???? //touching Fremont rn
                 Name : fileName,
-                Body: fileToUpload,
+                Body: base64data,
                 ContentType : fileType, 
               });
             //},
