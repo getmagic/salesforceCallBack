@@ -41,9 +41,9 @@
       d.textContent+=url;
       //var fileToUpload= base64Encode(url);
       
-      if (url){
+      if (Element.files[0]){
         var reader = new FileReader();
-        reader.readAsDataURL(url); 
+        reader.readAsDataURL(Element.files[0]);  //instead of url
         reader.onloadend = function() {
           var base64data = reader.result;                
           //console.log(base64data);
