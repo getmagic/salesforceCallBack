@@ -45,7 +45,8 @@
       reader.readAsDataURL(url); 
       reader.onloadend = function() {
         var base64data = reader.result;                
-        console.log(base64data);
+        //console.log(base64data);
+        console.log( base64data.substr(base64data.indexOf(',')+1) );
       }
       
       //var base64data = Buffer.from(url).toString('base64');
