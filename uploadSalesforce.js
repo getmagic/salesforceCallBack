@@ -197,6 +197,82 @@ $(".previous").click(function(){
 
 
 
+//ensures the right amount of files are uploaded by user
+function getFileInfo(fileID, container, maxlength){ //fileID is the ID of the file's input, "container" is the container where u write message
+  var x = document.getElementById(fileID);
+  var txt = "";
+  if ('files' in x) {
+    if (x.files.length == 0) {
+      txt = "Select one or more files.";
+    } 
+    else {
+      if (maxlength != null) {
+        //for all containers other than "ExamplePhotosInfo", ensure that the exact number of files have been uploaded. If the file is ExamplePhotos, then you can upload less than the specified photos
+        if (((container!= "ExamplePhotosInfo" && container!= "CodePhotsInfo") && x.files.length != maxlength) || ((container== "ExamplePhotosInfo" || container== "CodePhotsInfo")&& x.files.length > maxlength)){
+          //x.files[0].slice(0,maxlength);
+          txt="<span style='color:red; font-size:14px;'> You uploaded " + x.files.length + " file(s). Please upload "+ maxlength + " file(s) </span>";
+          //document.getElementById(container).innerHTML = txt;
+          var id_test="#" + fileID;
+          $(id_test).val(''); //resets the file
+          event.preventDefault();
+        }
+      }
+      for (var i = 0; i < x.files.length; i++) {
+        txt += "<br><strong>" + (i+1) + ". file</strong><br>";
+        var file = x.files[i];
+        if ('name' in file) {
+          txt += "name: " + file.name + "<br>";
+        }
+        if ('size' in file) {
+          txt += "size: " + file.size + " bytes <br>";
+        }
+      }
+    }
+  } 
+  else {
+    if (x.value == "") {
+      txt += "Select one or more files.";
+    } else {
+      txt += "The files property is not supported by your browser!";
+      txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+    }
+  }
+  document.getElementById(container).innerHTML = txt;
+}
+
+//ensures the uploaded file for code is a zipped file
+$('#uploadcode').bind("change", function(e){
+    var file = (e.srcElement || e.target).files[0];
+    console.log(file.type);
+    if ((file.type!="application/zip") && (file.type!="application/x-zip-compressed")){
+      $("#uploadcode").val(''); //resets the file
+      document.getElementById("CodeFilesInfo").innerHTML="<span style='color:red; font-size:14px;'> Please upload a zipped file. Press the question mark for additional assistance.</span>";
+      event.preventDefault();
+    } 
+});
+
+function matchYoutubeUrl(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/\?.+&v=))((\w|-){11})(?:\S+)?$/; //disallows "watch"
+    var matches = url.match(p); //search the attached string for whatever is in "p"
+    if(matches){ //if the URL has anything that is also inside p, return it (aka the URL is valid)
+        return matches[1];
+    }
+    return false;
+}
+
+function checkURL(ID){
+    var IDofElement='#'+ID;
+    var url = $(IDofElement).val(); //add ID of url input
+    var id = matchYoutubeUrl(url);
+    if(id!=false){
+        //alert('Correct URL');
+        return true;
+    }else{
+       // alert('Incorrect URL');
+       return false;
+    }
+}
+
 //appends all the languages used to "checkBoxLang" div in uploadProj.html
 function addCheckBoxLanguage() {
     for (var i=0; i<LanguagesArray.length; i++){
@@ -228,6 +304,39 @@ function addYearDropdown(){
     `<option value="` + i + `">` + i+ `</option>`;
     $("#Year-When-you-Were-A-Mentee").append(codeBlock);
   }
+}
+
+//checks whether a user has selected a language box from "languages used" before they can move on to the next section/
+function seeIfLanguageBoxisChecked(){
+  var messagetoreturn=null;
+  var checkBoxChecked=false;
+  for (var i=0; i<LanguagesArray.length; i++){
+      var idtocheck="language"+String(i);
+      var x = document.getElementById(idtocheck).checked;
+        if (x == true) {
+          checkBoxChecked=true;
+        }
+    }
+    if (checkBoxChecked==false){ //if nothing has been selected
+      var messagetoreturn="Languages Used";
+    }
+    else{
+      //document.getElementById("demolang").innerHTML="Something selected";
+      var messagetoreturn=null;
+    }
+    return messagetoreturn;
+}
+
+function wordLimit(IDofDesiredInput, IDofContainerForAlert, maxwords){
+    var BACKSPACE   = 8;
+    var DELETE      = 46;
+    var valid_keys  = [BACKSPACE, DELETE];
+    var textValue = document.getElementById(IDofDesiredInput).value;
+    var words = textValue.split(/\s+/);
+    if(words.length >= maxwords && valid_keys.indexOf(event.keyCode) == -1){ //if there are more than 100 words and if the key pressed is not backspace or delete, do not let the user continue typing in the box. 
+          event.preventDefault();
+    }
+    document.getElementById(IDofContainerForAlert).innerHTML= maxwords- words.length;
 }
 
 /*append the "pop up" image code wherever pop ups need to be there*/
@@ -267,3 +376,84 @@ function displayPopUpImage(CurrentID) {
     currentpopup.classList.remove("show");
   }
 }
+
+/*tags on fieldset 3*/
+var SelectedTags=[];
+$( ".msform #no3 #FormTags input[type=button]" ).click(function() {
+  var valueOfSelectedButton=$(this).attr('value');//get the value of the clicked button
+  if (SelectedTags.includes(valueOfSelectedButton) == false) { //if the tag has not already been selected, then select it
+    SelectedTags.push(valueOfSelectedButton)
+    this.style.background="gray";
+  }
+  else{ //if the user has already selected the specified tag and clicks on it, then assume that the user does not want that specific tag anymore
+    var indexOfButton= SelectedTags.indexOf(valueOfSelectedButton);
+    //at the specified index, remove one item (aka remove the button from the index)
+    SelectedTags.splice(indexOfButton, 1);
+    this.style.background="#d9d9d9";
+  }
+
+  if (SelectedTags.includes("Software")!=true){
+    document.getElementById("checkBoxLang").style.display="none";
+  }
+  //if the user selects website or software, then ask for github info. If the user selects software, then display "Languages used". If the suer selects website, then do not display the NonWebsiteDescription.
+  if ((SelectedTags.includes("Website"))|| (SelectedTags.includes("Software"))){
+    document.getElementById("whenWebSelected").style.display="block";
+    if (SelectedTags.includes("Software")){
+      document.getElementById("checkBoxLang").style.display="block";
+    }
+    else{document.getElementById("checkBoxLang").style.display="none";}
+
+    if (SelectedTags.includes("Website")){
+      document.getElementById("NonWebsiteDescription").style.display="none";
+    }
+    else{document.getElementById("NonWebsiteDescription").style.display="block";}
+  }
+  else{
+    document.getElementById("whenWebSelected").style.display="none";
+  }
+  //when the user selects a "software" tag, ask if their project is on github and ask them for which languages they used
+  /*
+  if (SelectedTags.includes("Software")){
+      document.getElementById("whenWebSelected").style.display="block";
+      document.getElementById("checkBoxLang").style.display="block";
+  }
+  else{ document.getElementById("whenWebSelected").style.display="none"; document.getElementById("checkBoxLang").style.display="none";}
+
+  //when the user selects a "website" tag, ask if their project is on github
+  if (SelectedTags.includes("Website")){
+      document.getElementById("NonWebsiteDescription").style.display="none";
+      document.getElementById("whenWebSelected").style.display="block";
+  }
+  else{ document.getElementById("whenWebSelected").style.display="none"; document.getElementById("NonWebsiteDescription").style.display="block";}
+*/
+
+  //when Other is selected, open a text box for the user to enter additional tags for their project
+  if (SelectedTags.includes("Other")){
+    document.getElementById("specifymore1").style.display="block";
+  }
+  else{ document.getElementById("specifymore1").style.display="none";}
+
+});
+
+
+$('#no3 input[type=radio]').change(function(){
+  /*if (document.getElementById("YesCodeUpload").checked==true) {
+    document.getElementById("checkBoxLang").style.display="block";
+  } else{document.getElementById("checkBoxLang").style.display="none";} */
+
+  if (document.getElementById("whenWebSelected").style.display=="block"){
+    if (document.getElementById("nogitweb").checked==true) {
+      //Uncomment if you want the user to specify where their website is hosted if not github: document.getElementById("specifymore2").style.display="block";
+      document.getElementById("receivegithublink").style.display="none";
+    }
+    else{
+      //document.getElementById("specifymore2").style.display="none";
+      document.getElementById("receivegithublink").style.display="block";
+    }
+  } 
+
+})
+
+
+
+
