@@ -1,28 +1,3 @@
-// Submit form
-function submitForm(e){ //e stands for "event"
-  //prevents the information from getting submitted through HTML. For example, if u use preventDefault whenever someone clicks a url, u are preventing a link from opening a different URL
-  e.preventDefault();
-  //show the fifth fieldset + change progressbar
-  $('#no4').hide();
-  $('#no5').show();
-  $("#progressbar li").eq($("fieldset").index('#no5')).addClass("active");
-  //console.log("Submit called");
-  
-  var fname = getInputVal('FirstName'); //getInputVal is a function defined by the user above
-  var lname = getInputVal('LastName');
-  var YearMentee = getInputVal('Year-When-you-Were-A-Mentee');
-  var MenteeGrade= getInputVal('Grade-When-you-Were-A-Mentee');
-  var ProjectDescription= getInputVal('projectdec');
-  var MenteeMentorRelationship= getInputVal('menteedec');
-  var ProjectSummary= getInputVal('projsummary');
-  var InterviewLink= getInputVal('InterviewLink');
-  var PresentationLink= getInputVal('PresentationLink');
-  //var projecttype= getRadioVal( document.getElementById('uploadProjForm'), 'Type-of-Project' );
-  //saves the attributes that all mentees need in the database
-  //UserUID= saveProject(fname, lname, YearMentee, MenteeGrade, projecttype, ProjectDescription, MenteeMentorRelationship, ProjectSummary, InterviewLink, PresentationLink);
-  //UserUID= saveProject(fname, lname, YearMentee, MenteeGrade, ProjectDescription, MenteeMentorRelationship, ProjectSummary);
-};
-
 function getInputVal(id){
   return document.getElementById(id).value;
 }
