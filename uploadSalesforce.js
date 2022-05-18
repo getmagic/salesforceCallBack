@@ -74,16 +74,16 @@ $(".next").click(function(){
     //alert(e.message)
     document.getElementById("errorMessage1").innerHTML=e.message);
   //promise.catch(e => console.log("Error"));
+    /*
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       moveNext(this);
     } 
     else{
       //promise.catch(e => alert(e.message));
-      /*//JUST TO SEE ERROR MESSAGES
-      moveNext(this);*/
+     
     }
-  });
+  });*/
   }//end of first fieldset
   else{
     /*if ($(document.getElementById('no4')).is(":visible")){ 
