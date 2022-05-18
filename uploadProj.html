@@ -32,8 +32,36 @@
         $("#progressbar li").eq($("fieldset").index('#no5')).addClass("active");
         //console.log("Submit called");
         var fname = getInputVal('FirstName'); //getInputVal is a function defined by the user above
-        console.log(fname);
-      })
+        var lname = getInputVal('LastName');
+        var YearMentee = getInputVal('Year-When-you-Were-A-Mentee');
+        var MenteeGrade= getInputVal('Grade-When-you-Were-A-Mentee'); ////////////
+        var ProjectDescription= getInputVal('projectdec'); 
+        var MenteeMentorRelationship= getInputVal('menteedec');
+        var ProjectSummary= getInputVal('projsummary');
+        var InterviewLink= getInputVal('InterviewLink');
+        var PresentationLink= getInputVal('PresentationLink');
+        conn.sobject("MAGICMenteeProjects__c").create(
+            {
+              firstName__c : fname , 
+              year__c : YearMentee , 
+              projectDescription__c: ProjectDescription,
+              projectSummary__c : ProjectSummary, 
+              lastName__c: lname, 
+              additionalDescription__c: "Need to make this non-required and add something for mentee grade", 
+              menteeMentorRelationship__c: MenteeMentorRelationship,
+            }, function (error, result) {
+              if (error) {
+                  console.log("There was an error adding this project to the database.");
+                  console.log(error);
+              }
+              else {
+                console.log("This project was succesfully uploaded. The resulting id is " + result.id);
+               
+              }
+            }); //end of conn.sobject create
+        
+      }) //end of addEventListener
+   }); //end of on connect
       
       /*
       // Submit form
@@ -89,7 +117,7 @@ function submitForm(e){ //e stands for "event"
             }); //end of conn.sobject create
         });//end of addEventListener function
        */
-      }); //end of on connect
+     
       
                        
                        
