@@ -31,6 +31,7 @@
         $('#no5').show();
         $("#progressbar li").eq($("fieldset").index('#no5')).addClass("active");
         //console.log("Submit called");
+        var userID;
         var fname = getInputVal('FirstName'); //getInputVal is a function defined by the user above
         var lname = getInputVal('LastName');
         var YearMentee = getInputVal('Year-When-you-Were-A-Mentee');
@@ -57,7 +58,7 @@
               }
               else {
                 console.log("This project was succesfully uploaded. The resulting id is " + result.id);
-                var userID= result.id;
+                userID= result.id;
               }
             }); //end of conn.sobject create
         
