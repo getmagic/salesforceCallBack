@@ -66,12 +66,14 @@
                 //By putting the logic in the callback, you are ensuring that it is synchronous so you never get an error that the ID you want to update doesn't exist.
                 //if the user enters an interview (or presentation) link, then save it in the database.
                 if (InterviewLink !=""){
-                  databaseFieldName.push("interviewLink__c");
-                  databaseValue.push(InterviewLink);
+                  //databaseFieldName.push("interviewLink__c");
+                  //databaseValue.push(InterviewLink);
+                  pushToDatabaseArrays("interviewLink__c", InterviewLink);
                 }//end of if interviewLink is not null
                 if (PresentationLink !=""){
-                  databaseFieldName.push("presentationLink__c");
-                  databaseValue.push(PresentationLink);
+                  //databaseFieldName.push("presentationLink__c");
+                  //databaseValue.push(PresentationLink);
+                  pushToDatabaseArrays("presentationLink__c", PresentationLink);
                 }
                 
                 //For the languages used section
@@ -83,7 +85,7 @@
                   var othertags=getInputVal("specifymore1");
                   SelectedTags.push(othertags);
                 }
-                pushToDatabaseArrays("LanguagesUsed__c",SelectedTags); 
+                pushToDatabaseArrays("LanguagesUsed__c", SelectedTags); 
                 //databaseFieldName.push("LanguagesUsed__c");
                 //databaseValue.push(SelectedTags);
                // var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
