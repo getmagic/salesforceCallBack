@@ -73,6 +73,19 @@
                   databaseFieldName.push("presentationLink__c");
                   databaseValue.push(PresentationLink);
                 }
+                //HERE IS WHERE U START EDITING
+                //replace the word "Other" with the specified tags
+                if (SelectedTags.includes("Other")){
+                  var indexOfOtherTag= SelectedTags.indexOf("Other");
+                  //at the specified index, remove one item (aka remove "Others" from the index)
+                  SelectedTags.splice(indexOfOtherTag, 1);
+                  //var othertags=document.getElementById("specifymore1").innerHTML;
+                  var othertags=getInputVal("specifymore1");
+                  console.log(othertags);
+                  SelectedTags.push(othertags);
+                }
+                saveDataToDatabase(UserUID, 'projectTags', SelectedTags);
+                var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
                 
                 
                 for (var i=0; i<databaseFieldName.length; i++) {
