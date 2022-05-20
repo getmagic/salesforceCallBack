@@ -62,13 +62,12 @@
                 //By putting the logic in the callback, you are ensuring that it is synchronous so you never get an error that the ID you want to update doesn't exist.
                 //if the user enters an interview (or presentation) link, then save it in the database.
                 if (InterviewLink !=""){
-                 //saveDataToDatabase(UserUID, 'interviewLink', InterviewLink);
                  conn.sobject('MAGICMenteeProjects__c').update({
                     Id: userID,//
                     interviewLink__c: InterviewLink
                   }, function(err, res) {
                     if(err){console.log(err)}
-                    if(res){console.log(record.interviewLink__c)}
+                    if(res){console.log(succesfully uploaded interview link)}
                  }) //end of conn.sobject.update
                 }//end of if interviewLink is not null
               } 
