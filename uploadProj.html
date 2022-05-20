@@ -68,18 +68,12 @@
                 if (InterviewLink !=""){
                   databaseFieldName.push("interviewLink__c");
                   databaseValue.push(InterviewLink);
-                 /*conn.sobject('MAGICMenteeProjects__c').update({
-                    Id: userID,//
-                    interviewLink__c: InterviewLink
-                  }, function(err, res) {
-                    if(err){console.log(err)}
-                    if(res){console.log(succesfully uploaded interview link)}
-                 }) //end of conn.sobject.update*/
                 }//end of if interviewLink is not null
                 if (PresentationLink !=""){
                   databaseFieldName.push("presentationLink__c");
                   databaseValue.push(PresentationLink);
                 }
+                
                 
                 for (var i=0; i<databaseFieldName.length; i++) {
                   currentFieldName= databaseFieldName[i];
