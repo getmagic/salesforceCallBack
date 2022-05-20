@@ -88,6 +88,7 @@
                 }
                 pushToDatabaseArrays("projectTags__c", SelectedTags);
                 var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
+                pushToDatabaseArrays("codeToUpload__c", whetherThereIsCodeToUpload);
                 
                 
                 //EDIT HERE!!!!!
