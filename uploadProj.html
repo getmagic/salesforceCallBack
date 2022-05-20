@@ -45,7 +45,8 @@
         var ProjectSummary= getInputVal('projsummary');
         var InterviewLink= getInputVal('InterviewLink');
         var PresentationLink= getInputVal('PresentationLink');
-        var addedDesc= getInputVal('Description-Of-NonWebsite-Project');
+        //var addedDesc= getInputVal('Description-Of-NonWebsite-Project');
+        var addedDesc= getInputVal('Added-Description');
         conn.sobject("MAGICMenteeProjects__c").create(
             {
               firstName__c : fname , 
@@ -111,7 +112,7 @@
                     saveDataToDatabase(UserUID, 'languagesUsed', ArrayOfUsedLanguages);
                   }
                   if (SelectedTags.includes("Website")==false){
-                    var AdditionalDescription= getInputVal('Description-Of-NonWebsite-Project');
+                    var AdditionalDescription= getInputVal('Added-Description');
                     saveDataToDatabase(UserUID, 'additionalDescription', AdditionalDescription);
                   }
                 }
@@ -301,9 +302,9 @@
         </div>
 
         <div id="NonWebsiteDescription" style="display:none;">
-          <label for="Description-Of-NonWebsite-Project" class="titlequest"> Please describe where to find your project (if it is available on the app store for example), How your project works, etc : </label>
+          <label for="Added-Description" class="titlequest"> Please describe where to find your project (if it is available on the app store for example), How your project works, etc : </label>
            <p class="titlequest" style="color:red;">Number of words Left: <span id="no4span">200 </span></p>
-          <textarea  class="textareaadd required" name="Description-Of-NonWebsite-Project" id="Description-Of-NonWebsite-Project" placeholder="Please write here" onpaste="return false;" onKeyDown="wordLimit(this.id, 'no4span', 200);"></textarea>
+          <textarea  class="textareaadd required" name="Added-Description" id="Added-Description" placeholder="Please write here" onpaste="return false;" onKeyDown="wordLimit(this.id, 'no4span', 200);"></textarea>
         </div>
 
         <div id="UploadInterviewLink">
