@@ -86,7 +86,7 @@
                   currentFieldValue= databaseValue[i];
                   conn.sobject('MAGICMenteeProjects__c').update({
                       Id: userID,//
-                      currentFieldName : currentFieldValue
+                      [currentFieldName] : [currentFieldValue]
                     }, function(err, res) {
                       if(err){console.log(err)}
                       if(res){console.log("succesfully uploaded " + databaseFieldName[i])}
