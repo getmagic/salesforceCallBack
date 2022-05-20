@@ -85,10 +85,36 @@
                   var othertags=getInputVal("specifymore1");
                   SelectedTags.push(othertags);
                 }
-                pushToDatabaseArrays("projectTags__c", SelectedTags); 
-                //databaseFieldName.push("LanguagesUsed__c");
-                //databaseValue.push(SelectedTags);
-               // var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
+                pushToDatabaseArrays("projectTags__c", SelectedTags);
+                var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
+                
+                
+                //EDIT HERE!!!!!
+                if ((SelectedTags.includes("Website"))|| (SelectedTags.includes("Software"))){
+                  //add github info to the database
+                  var websiteongit= getRadioVal( document.getElementById('uploadProjForm'), "Whether-Project-Is-On-GitHub" );
+                  if (websiteongit=="Yes"){
+                      var menteeGithubLink= getInputVal('receivegithublink');
+                      saveDataToDatabase(UserUID, 'menteeGithubLink', menteeGithubLink)
+                  }
+                  saveDataToDatabase(UserUID, 'isWebsiteOnGit', websiteongit);
+                  if (SelectedTags.includes("Software")){
+                    //add checkBoxLang info to the database
+                    ArrayOfUsedLanguages= getCheckedBoxes('Languages-Used');
+                    if (ArrayOfUsedLanguages.includes("Other")){
+                      var indexOfOtherTag= ArrayOfUsedLanguages.indexOf("Other");
+                      //at the specified index, remove one item (aka remove "Others" from the index)
+                      ArrayOfUsedLanguages.splice(indexOfOtherTag, 1); 
+                      var othertags=document.getElementById("specifymore3").innerHTML;
+                      ArrayOfUsedLanguages.push(othertags)
+                    }
+                    saveDataToDatabase(UserUID, 'languagesUsed', ArrayOfUsedLanguages);
+                  }
+                  if (SelectedTags.includes("Website")==false){
+                    var AdditionalDescription= getInputVal('Description-Of-NonWebsite-Project');
+                    saveDataToDatabase(UserUID, 'additionalDescription', AdditionalDescription);
+                  }
+                }
                 
                 
                 for (var i=0; i<databaseFieldName.length; i++) {
