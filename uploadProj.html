@@ -88,9 +88,15 @@
                 }
                 pushToDatabaseArrays("projectTags__c", SelectedTags);
                 var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
-                pushToDatabaseArrays("codeToUpload__c", whetherThereIsCodeToUpload);
+                if (whetherThereIsCodeToUpload=="Yes"){
+                  pushToDatabaseArrays("codeToUpload__c", true);
+                }
+                else{
+                  pushToDatabaseArrays("codeToUpload__c", false);
+                }
                 
                 
+                /*
                 //EDIT HERE!!!!!
                 if ((SelectedTags.includes("Website"))|| (SelectedTags.includes("Software"))){
                   //add github info to the database
@@ -116,7 +122,7 @@
                     var AdditionalDescription= getInputVal('Added-Description');
                     saveDataToDatabase(UserUID, 'additionalDescription', AdditionalDescription);
                   }
-                }
+                }*/
                 
                 
                 for (var i=0; i<databaseFieldName.length; i++) {
