@@ -84,7 +84,9 @@
                   console.log(othertags);
                   SelectedTags.push(othertags);
                 }
-                saveDataToDatabase(UserUID, 'projectTags', SelectedTags);
+               // saveDataToDatabase(UserUID, 'projectTags', SelectedTags);
+                //databaseFieldName.push("interviewLink__c");
+                //databaseValue.push(InterviewLink);
                 var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
                 
                 
@@ -92,7 +94,7 @@
                   currentFieldName= databaseFieldName[i];
                   currentFieldValue= databaseValue[i];
                   conn.sobject('MAGICMenteeProjects__c').update({
-                      Id: userID,//
+                      Id: userID,
                       [currentFieldName]: currentFieldValue
                     }, function(err, res) {
                       if(err){console.log(err)}
