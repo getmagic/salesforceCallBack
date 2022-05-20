@@ -32,6 +32,8 @@
         $("#progressbar li").eq($("fieldset").index('#no5')).addClass("active");
         //console.log("Submit called");
         var userID;
+        var databaseFieldName = [];
+        var databaseValue = [];
         var fname = getInputVal('FirstName'); //getInputVal is a function defined by the user above
         var lname = getInputVal('LastName');
         var YearMentee = getInputVal('Year-When-you-Were-A-Mentee');
@@ -62,15 +64,30 @@
                 //By putting the logic in the callback, you are ensuring that it is synchronous so you never get an error that the ID you want to update doesn't exist.
                 //if the user enters an interview (or presentation) link, then save it in the database.
                 if (InterviewLink !=""){
-                 conn.sobject('MAGICMenteeProjects__c').update({
+                  databaseFieldName.push("interviewLink__c");
+                  databaseValue.push(InterviewLink);
+                 /*conn.sobject('MAGICMenteeProjects__c').update({
                     Id: userID,//
                     interviewLink__c: InterviewLink
                   }, function(err, res) {
                     if(err){console.log(err)}
                     if(res){console.log(succesfully uploaded interview link)}
-                 }) //end of conn.sobject.update
+                 }) //end of conn.sobject.update*/
                 }//end of if interviewLink is not null
-              } 
+                if (PresentationLink !=""){
+                  databaseFieldName.push("presentationLink__c");
+                  databaseValue.push(PresentationLink);
+                }
+                for (var i=0; i<databaseFieldName.length; i++) {
+                  conn.sobject('MAGICMenteeProjects__c').update({
+                      Id: userID,//
+                      databaseFieldName[i] : databaseValue[i]
+                    }, function(err, res) {
+                      if(err){console.log(err)}
+                      if(res){console.log("succesfully uploaded " + databaseFieldName[i])}
+                   }) //end of conn.sobject.update
+                }//end of for var i <databaseFieldName.length
+              } //end of else
             }); //end of conn.sobject create
         
             
