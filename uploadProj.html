@@ -9,7 +9,9 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.3.1/jsforce.min.js"></script>
   <script>
-
+     var databaseFieldName = [];
+     var databaseValue = [];
+    
     jsforce.browser.init({
       clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //client ID= consumer key of connected app
       redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html',
@@ -32,8 +34,6 @@
         $("#progressbar li").eq($("fieldset").index('#no5')).addClass("active");
         //console.log("Submit called");
         var userID;
-        var databaseFieldName = [];
-        var databaseValue = [];
         var currentFieldName;
         var currentFieldValue;
         var fname = getInputVal('FirstName'); //getInputVal is a function defined by the user above
@@ -73,26 +73,29 @@
                   databaseFieldName.push("presentationLink__c");
                   databaseValue.push(PresentationLink);
                 }
-                //HERE IS WHERE U START EDITING
+                
+                //For the languages used section
                 //replace the word "Other" with the specified tags
                 if (SelectedTags.includes("Other")){
                   var indexOfOtherTag= SelectedTags.indexOf("Other");
                   //at the specified index, remove one item (aka remove "Others" from the index)
                   SelectedTags.splice(indexOfOtherTag, 1);
-                  //var othertags=document.getElementById("specifymore1").innerHTML;
                   var othertags=getInputVal("specifymore1");
-                  console.log(othertags);
                   SelectedTags.push(othertags);
                 }
-               // saveDataToDatabase(UserUID, 'projectTags', SelectedTags);
-                //databaseFieldName.push("interviewLink__c");
-                //databaseValue.push(InterviewLink);
-                var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
+                pushToDatabaseArrays("LanguagesUsed__c",SelectedTags); 
+                //databaseFieldName.push("LanguagesUsed__c");
+                //databaseValue.push(SelectedTags);
+               // var whetherThereIsCodeToUpload=getRadioVal( document.getElementById('uploadProjForm'), 'Whether-You-Have-Code-To-Upload' );
                 
                 
                 for (var i=0; i<databaseFieldName.length; i++) {
                   currentFieldName= databaseFieldName[i];
                   currentFieldValue= databaseValue[i];
+                  //If you are dealing with the languages array, turn it from [Math, Physics, English] to 'Math; Physics; English' so values can be added to database
+                  if (currentFieldValue == SelectedTags){
+                    currentFieldValue = arrayToColonSeparation(SelectedTags);
+                  }
                   conn.sobject('MAGICMenteeProjects__c').update({
                       Id: userID,
                       [currentFieldName]: currentFieldValue
@@ -107,6 +110,16 @@
             
       }) //end of addEventListener
    }); //end of on connect
+    
+   function arrayToColonSeparation(simpleArray){
+     let commaSeperated = simpleArray.join(";");
+     return commaSeperated;
+   }
+   
+   function pushToDatabaseArrays(fieldName, fieldValue){
+     databaseFieldName.push(fieldName);
+     databaseValue.push(fieldValue);
+   }
       
      
 </script>
