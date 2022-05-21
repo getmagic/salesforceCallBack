@@ -69,6 +69,7 @@ jsforce.browser.on('connect', function(conn) {
               // var path = '/services/data/v40.0';
            var path = '/services/data/v54.0';
             ///services/data/v54.0/sobjects/MAGICMenteeProjects__c/a008c00000ZT
+              var base64data = Buffer.from(file).toString('base64'); //filedata is undefined in this case
 
             //const conn = new jsforce.Connection({ accessToken: '{!$Api.Session_ID}' });
             return conn.requestPost( path + '/composite/', {
