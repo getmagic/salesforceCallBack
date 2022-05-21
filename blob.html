@@ -39,13 +39,27 @@
       console.log(url);
       var d=document.querySelector(".p");
       d.textContent+=url;
+      
+      /*
       //var fileToUpload= base64Encode(url);
       conn.sobject('Attachment').create({ //Uploads this into the attachments section of the id of the desired project 
                 ParentId: 'a008c00000aF20pAAC', //id of mentee project where u want to upload file???? //touching Fremont rn
                 Name : fileName,
                 Body: url,
                 ContentType : fileType, 
-              });
+              });*/
+      
+      
+      const uploadContentVersion = (fileName: 'Hello', file: url): Promise<jsforce.RecordResult> =>
+      conn.sobject('Attachment').create({
+          PathOnClient : fileName,
+          VersionData : file.toString('base64')
+      })
+      
+      
+      
+      
+      
       /*
       if (Element.files[0]){
         var reader = new FileReader();
