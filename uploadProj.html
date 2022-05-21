@@ -98,7 +98,7 @@
                 
                 
                 
-                //EDIT HERE!!!!!
+               
                 if ((SelectedTags.includes("Website"))|| (SelectedTags.includes("Software"))){
                   //add github info to the database
                   var websiteongit= getRadioVal( document.getElementById('uploadProjForm'), "Whether-Project-Is-On-GitHub" );
@@ -149,7 +149,7 @@
                       [currentFieldName]: currentFieldValue
                     }, function(err, res) {
                       if(err){console.log(err)}
-                      if(res){console.log("succesfully uploaded " + databaseFieldName[i])}
+                      if(res){console.log("succesfully uploaded " + currentFieldName)}
                    }) //end of conn.sobject.update
                 }//end of for var i <databaseFieldName.length
               } //end of else
