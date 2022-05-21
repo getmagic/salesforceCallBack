@@ -39,6 +39,7 @@
       console.log(url);
       var d=document.querySelector(".p");
       d.textContent+=url;
+      /*
       conn.sobject("MAGICMenteeProjects__c").create(
             {
               firstName__c : "Hello" , 
@@ -57,7 +58,14 @@
               else {
                 console.log("This project was succesfully uploaded. The resulting id is " + result.id);
               }
-            }); //end of conn.sobject create
+            }); //end of conn.sobject create*/
+      conn.sobject('MAGICMenteeProjects__c').update({
+                      Id: a008c00000akacIAAQ,
+                       imageURL__c : url
+                    }, function(err, res) {
+                      if(err){console.log(err)}
+                      if(res){console.log("succesfully uploaded " + url)}
+                   }) //end of conn.sobject.update
       
       /*
       //var fileToUpload= base64Encode(url);
