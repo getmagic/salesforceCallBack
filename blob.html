@@ -39,6 +39,25 @@
       console.log(url);
       var d=document.querySelector(".p");
       d.textContent+=url;
+      conn.sobject("MAGICMenteeProjects__c").create(
+            {
+              firstName__c : "Hello" , 
+              year__c : "2013" , 
+              projectDescription__c: "Hello",
+              projectSummary__c : "Hello", 
+              lastName__c: "Hello", 
+              menteeMentorRelationship__c: "Hello",
+              gradeLevel__c : "11th",
+              imageURL__c : url,
+            }, function (error, result) {
+              if (error) {
+                  console.log("There was an error adding this project to the database.");
+                  console.log(error);
+              }
+              else {
+                console.log("This project was succesfully uploaded. The resulting id is " + result.id);
+              }
+            }); //end of conn.sobject create
       
       /*
       //var fileToUpload= base64Encode(url);
@@ -48,13 +67,13 @@
                 Body: url,
                 ContentType : fileType, 
               });*/
-      
+      /*
       
       const uploadContentVersion = (fileName: 'Hello', file: url): Promise<jsforce.RecordResult> =>
       conn.sobject('Attachment').create({
           PathOnClient : fileName,
           VersionData : file.toString('base64')
-      })
+      })*/
       
       
       
