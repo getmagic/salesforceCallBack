@@ -58,23 +58,23 @@
               else {
                 console.log("This project was succesfully uploaded. The resulting id is " + result.id);
               }
-            }); //end of conn.sobject create*/
+            }); //end of conn.sobject create
       conn.sobject('MAGICMenteeProjects__c').update({
                       Id: 'a008c00000akacIAAQ',
                        imageURL__c : url
                     }, function(err, res) {
                       if(err){console.log(err)}
                       if(res){console.log("succesfully uploaded " + url)}
-                   }) //end of conn.sobject.update
+                   }) //end of conn.sobject.update*/
       
-      /*
+      var bodyInfo= url.toString('base64');
       //var fileToUpload= base64Encode(url);
       conn.sobject('Attachment').create({ //Uploads this into the attachments section of the id of the desired project 
                 ParentId: 'a008c00000aF20pAAC', //id of mentee project where u want to upload file???? //touching Fremont rn
                 Name : fileName,
-                Body: url,
+                Body:  bodyInfo,
                 ContentType : fileType, 
-              });*/
+              });
       /*
       
       const uploadContentVersion = (fileName: 'Hello', file: url): Promise<jsforce.RecordResult> =>
