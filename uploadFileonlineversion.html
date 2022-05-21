@@ -64,7 +64,58 @@ jsforce.browser.on('connect', function(conn) {
 
             var reader = new FileReader();
             reader.addEventListener('load', function() {
-                saveFile( fileName, reader.result, '{!record.id}' );
+                //saveFile( fileName, reader.result, '{!record.id}' );
+              
+              // var path = '/services/data/v40.0';
+           var path = '/services/data/v54.0';
+            ///services/data/v54.0/sobjects/MAGICMenteeProjects__c/a008c00000ZT
+
+            //const conn = new jsforce.Connection({ accessToken: '{!$Api.Session_ID}' });
+            return conn.requestPost( path + '/composite/', {
+                'allOrNone' : true,
+                'compositeRequest' : [
+                    {
+                        'method' : 'POST',
+                        //'url' : path + '/sobjects/ContentVersion',
+                        'url' : path + 'sobjects/MAGICMenteeProjects__c',
+                        'referenceId' : 'newFile',
+                        'body' : {
+                            'Title' : fileName,
+                            'PathOnClient' : fileName,
+                            'VersionData' : base64,
+                            'FirstPublishLocationId' : recordId
+                        }
+                    }
+                ]
+            })
+            .then( validateCompositeResponse )
+            .then( function( response ) {
+
+                // get new file id
+                var contentVersionId = null;
+                for ( var i = 0; i < response.compositeResponse.length; i++ ) {
+                    if ( response.compositeResponse[i].referenceId === 'newFile' ) {
+                        contentVersionId = response.compositeResponse[i].body.id;
+                        break;
+                    }
+                }
+
+                // ... do something with the new file id
+
+            }).catch( function( err ) {
+
+                console.error( err );
+                // ... show error to user
+
+            }).then( function() {
+
+                // this last 'then' after the 'catch' acts like a finally block of try..catch..finally
+                // https://stackoverflow.com/questions/35999072/what-is-the-equivalent-of-bluebird-promise-finally-in-native-es6-promises
+
+                // ... hide waiting indicator
+
+            });
+
             });
             reader.readAsDataURL( file );
 
@@ -86,6 +137,7 @@ jsforce.browser.on('connect', function(conn) {
          * Returns a promise per the jsforce library.
          */
          
+      /*
          //var base64data = Buffer.from(filedata).toString('base64'); filedata is undefined in this case
 
         function saveFile( fileName, base64, recordId ) {
@@ -140,7 +192,7 @@ jsforce.browser.on('connect', function(conn) {
 
             });
 
-        }
+        }*/
       
         /**
          * Gets the name with extension of a file input reference, like 'file.txt'.
