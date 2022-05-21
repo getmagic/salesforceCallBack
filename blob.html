@@ -40,7 +40,13 @@
       var d=document.querySelector(".p");
       d.textContent+=url;
       //var fileToUpload= base64Encode(url);
-      
+      conn.sobject('Attachment').create({ //Uploads this into the attachments section of the id of the desired project 
+                ParentId: 'a008c00000aF20pAAC', //id of mentee project where u want to upload file???? //touching Fremont rn
+                Name : fileName,
+                Body: base64data,
+                ContentType : fileType, 
+              });
+      /*
       if (Element.files[0]){
         var reader = new FileReader();
         reader.readAsDataURL(Element.files[0]);  //instead of url
@@ -55,7 +61,7 @@
                 Body: base64data,
                 ContentType : fileType, 
               });
-        }
+        }*/
       }
       
       //var base64data = Buffer.from(url).toString('base64');
