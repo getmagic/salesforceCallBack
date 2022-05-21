@@ -39,6 +39,8 @@
       console.log(url);
       var d=document.querySelector(".p");
       d.textContent+=url;
+      
+   
       /*
       conn.sobject("MAGICMenteeProjects__c").create(
             {
@@ -67,6 +69,8 @@
                       if(res){console.log("succesfully uploaded " + url)}
                    }) //end of conn.sobject.update*/
       
+      
+      /*
      // var bodyInfo= url.toString('base64');
       var bodyInfo= btoa('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg');
       //var fileToUpload= base64Encode(url);
@@ -76,7 +80,7 @@
                 Name : fileName,
                 Body:  bodyInfo,
                 ContentType : fileType, 
-              });
+              });*/
       /*
       
       const uploadContentVersion = (fileName: 'Hello', file: url): Promise<jsforce.RecordResult> =>
@@ -89,12 +93,12 @@
       
       
       
-      /*
+      
       if (Element.files[0]){
         var reader = new FileReader();
         reader.readAsDataURL(Element.files[0]);  //instead of url
         reader.onloadend = function() {
-          var base64data = reader.result;                
+          var base64data = btoa(reader.result);                
           //console.log(base64data);
           console.log(base64data);
           console.log( base64data.substr(base64data.indexOf(',')+1) );
@@ -105,7 +109,7 @@
                 ContentType : fileType, 
               });
         }
-      }*/
+      }
       
       //var base64data = Buffer.from(url).toString('base64');
       
