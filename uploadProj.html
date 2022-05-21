@@ -72,9 +72,10 @@
                 if (PresentationLink !=""){
                   pushToDatabaseArrays("presentationLink__c", PresentationLink);
                 }
+                /*
                 if (addedDesc !=""){
                   pushToDatabaseArrays("additionalDescription__c", addedDesc);
-                }
+                }*/
                 
                 
                 //For the languages used section
@@ -96,16 +97,21 @@
                 }
                 
                 
-                /*
+                
                 //EDIT HERE!!!!!
                 if ((SelectedTags.includes("Website"))|| (SelectedTags.includes("Software"))){
                   //add github info to the database
                   var websiteongit= getRadioVal( document.getElementById('uploadProjForm'), "Whether-Project-Is-On-GitHub" );
                   if (websiteongit=="Yes"){
                       var menteeGithubLink= getInputVal('receivegithublink');
-                      saveDataToDatabase(UserUID, 'menteeGithubLink', menteeGithubLink)
+                      pushToDatabaseArrays("menteeGithubLink__c", menteeGithubLink);
+                      pushToDatabaseArrays("isWebsiteOnGit__c", true);
                   }
-                  saveDataToDatabase(UserUID, 'isWebsiteOnGit', websiteongit);
+                  else{
+                    pushToDatabaseArrays("isWebsiteOnGit__c", false);
+                  }
+                  //saveDataToDatabase(UserUID, 'isWebsiteOnGit', websiteongit);
+                  
                   if (SelectedTags.includes("Software")){
                     //add checkBoxLang info to the database
                     ArrayOfUsedLanguages= getCheckedBoxes('Languages-Used');
@@ -116,13 +122,16 @@
                       var othertags=document.getElementById("specifymore3").innerHTML;
                       ArrayOfUsedLanguages.push(othertags)
                     }
-                    saveDataToDatabase(UserUID, 'languagesUsed', ArrayOfUsedLanguages);
+                    //saveDataToDatabase(UserUID, 'languagesUsed', ArrayOfUsedLanguages);
+                    pushToDatabaseArrays("languagesUsed__c", ArrayOfUsedLanguages);
+                    
                   }
                   if (SelectedTags.includes("Website")==false){
                     var AdditionalDescription= getInputVal('Added-Description');
-                    saveDataToDatabase(UserUID, 'additionalDescription', AdditionalDescription);
+                    //saveDataToDatabase(UserUID, 'additionalDescription', AdditionalDescription);
+                    pushToDatabaseArrays("additionalDescription__c", AdditionalDescription);
                   }
-                }*/
+                }
                 
                 
                 for (var i=0; i<databaseFieldName.length; i++) {
@@ -131,6 +140,9 @@
                   //If you are dealing with the languages array, turn it from [Math, Physics, English] to 'Math; Physics; English' so values can be added to database
                   if (currentFieldValue == SelectedTags){
                     currentFieldValue = arrayToColonSeparation(SelectedTags);
+                  }
+                  if (currentFieldValue == ArrayOfUsedLanguages){
+                    currentFieldValue = arrayToColonSeparation(ArrayOfUsedLanguages);
                   }
                   conn.sobject('MAGICMenteeProjects__c').update({
                       Id: userID,
@@ -279,7 +291,7 @@
 
         <div id="checkBoxLang" style="display:none;">
           <label for="langtype" class="titlequest">Languages Used: </label> <br>
-          <div id="checkBoxLangInterior" class="alignradiobuttons">-->
+          <div id="checkBoxLangInterior" class="alignradiobuttons">
             <!--This is where addCheckBoxLanguage() appends the Language checkboxes -->
           </div>
           <!--This is where addCheckBoxLanguage() appends the "Specify Languages Used" text box -->
