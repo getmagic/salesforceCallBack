@@ -14,20 +14,21 @@
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
         var records = [];
-        var query = conn.query("SELECT Id, isWebsiteOnGit__c, gradeLevel__c, Age__c FROM Project__c")
+        var query = conn.query("SELECT Id FROM Project__c")
           .on("record", function(record) {
         records.push(record);
         var userUID= record.Id;
-        var websongit= record.isWebsiteOnGit__c;
-        var age= record.Age__c;
+        //var websongit= record.isWebsiteOnGit__c;
+        //var age= record.Age__c;
         //var thumbnailLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg";
-        var GradeLevel= record.gradeLevel__c;
+        //var GradeLevel= record.gradeLevel__c;
+            /*
         if (GradeLevel=="9th" || GradeLevel=="10th" || GradeLevel=="11th" || GradeLevel=="12th"){
                 GradeLevel="High School";
               }
               else{
                 GradeLevel="Middle School";
-              }
+              }*/
             /*
         var paraNew = document.createElement("div");
         paraNew.setAttribute("class", "AllProjects_Div");
@@ -39,7 +40,7 @@
         </a> `;
         paraNew.innerHTML = codeBlock2 ;
         divToAppend.appendChild(paraNew); */
-        console.log(userUID + " ; " +websongit + " ; " + age+ " ; " + GradeLevel );
+        console.log(userUID );
         /*console.log(websongit);
         console.log(age);
         console.log(GradeLevel);*/
