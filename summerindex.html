@@ -14,7 +14,7 @@
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
         var records = [];
-        var query = conn.query("SELECT Id, isWebsiteOnGit__c, gradeLevel__c, Age__c FROM Mentee_Project__c")
+        var query = conn.query("SELECT Id, isWebsiteOnGit__c, gradeLevel__c, Age__c FROM Project__c")
           .on("record", function(record) {
         records.push(record);
         var userUID= record.Id;
