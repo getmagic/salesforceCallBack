@@ -13,22 +13,47 @@
     
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
+        var records = [];
+        var query = conn.query("SELECT Id, firstName__c, gradeLevel__c, lastName__c FROM MAGICMenteeProjects__c")
+          .on("record", function(record) {
+        records.push(record);
+        var userUID= record.Id;
+        var FirstName= record.firstName__c;
+        var LastName= record.lastName__c;
+        //var thumbnailLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg";
+        var GradeLevel= record.gradeLevel__c;
+        if (GradeLevel=="9th" || GradeLevel=="10th" || GradeLevel=="11th" || GradeLevel=="12th"){
+                GradeLevel="High School";
+              }
+              else{
+                GradeLevel="Middle School";
+              }
+            /*
+        var paraNew = document.createElement("div");
+        paraNew.setAttribute("class", "AllProjects_Div");
+        var codeBlock2 =
+        ` <a class="` + userUID+ ` col-md-4 single-blog lifestyle bottom_60 ">
+        <img class="` + userUID+ ` mentee-photos" src="`+ thumbnailLink + `" alt="` + FirstName + `'s Project">
+        <h2 class="` + userUID+ ` title">`+ FirstName + ` `+ LastName + `</h2>
+        <span class="` + userUID+ ` date">` + GradeLevel + `</span>
+        </a> `;
+        paraNew.innerHTML = codeBlock2 ;
+        divToAppend.appendChild(paraNew); */
+        console.log(userUID);
+        console.log(FirstName);
+        console.log(LastName);
+        console.log(GradeLevel);
+
+        })
+        .on("end", function() {
+          console.log("total in database : " + query.totalSize);
+          console.log("total fetched : " + query.totalFetched);
+        })
+        .on("error", function(err) {
+          console.error(err);
+        })
+        .run({ autoFetch : true, maxFetch : 4000 }); // synonym of Query#execute();
       
-      /*
-        //if you want to add a new instance of your custom object
-        conn.sobject("MAGICMenteeProjectsWebsite").create(
-            {
-              firstName__c : fname , //the api name of your field: the data you want to put in the field
-              lastName__c: lname, 
-            }, function (error, result) {
-              if (error) {
-               console.log(error);
-            }
-            else {
-                console.log("This project was successfully uploaded. The resulting id is " + result.id);
-                //By putting the logic/code in the callback, you are ensuring that it is synchronous (since jsforce is asynchronous)                             
-             } //end of else
-       }); //end of conn.sobject(" ").create(*/
     }); //end of jsforce.browser.on('connect'...    
 </script>
 </head>
