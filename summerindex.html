@@ -14,12 +14,12 @@
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
         var records = [];
-        var query = conn.query("SELECT Id, firstName__c, gradeLevel__c, lastName__c FROM MAGICMenteeProjects__c")
+        var query = conn.query("SELECT Id, isWebsiteOnGit__c, gradeLevel__c, Age__c FROM Project__c")
           .on("record", function(record) {
         records.push(record);
         var userUID= record.Id;
-        var FirstName= record.firstName__c;
-        var LastName= record.lastName__c;
+        var websongit= record.isWebsiteOnGit__c;
+        var age= record.Age__c;
         //var thumbnailLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg";
         var GradeLevel= record.gradeLevel__c;
         if (GradeLevel=="9th" || GradeLevel=="10th" || GradeLevel=="11th" || GradeLevel=="12th"){
@@ -40,8 +40,8 @@
         paraNew.innerHTML = codeBlock2 ;
         divToAppend.appendChild(paraNew); */
         console.log(userUID);
-        console.log(FirstName);
-        console.log(LastName);
+        console.log(websongit);
+        console.log(age);
         console.log(GradeLevel);
 
         })
