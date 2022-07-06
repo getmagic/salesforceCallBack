@@ -13,8 +13,10 @@
     
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
+      
+      /*
         //if you want to add a new instance of your custom object
-        conn.sobject("the API name of your custom object").create(
+        conn.sobject("MAGICMenteeProjectsWebsite").create(
             {
               firstName__c : fname , //the api name of your field: the data you want to put in the field
               lastName__c: lname, 
@@ -26,7 +28,7 @@
                 console.log("This project was successfully uploaded. The resulting id is " + result.id);
                 //By putting the logic/code in the callback, you are ensuring that it is synchronous (since jsforce is asynchronous)                             
              } //end of else
-       }); //end of conn.sobject(" ").create(
+       }); //end of conn.sobject(" ").create(*/
     }); //end of jsforce.browser.on('connect'...    
 </script>
 </head>
