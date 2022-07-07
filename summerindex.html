@@ -14,7 +14,7 @@
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
       var records = [];
-        var query = conn.query("SELECT Id, Mentee__c FROM Project__c").on("record", function(record) {
+        var query = conn.query("SELECT Id, Mentor_Name__c FROM Project__c").on("record", function(record) {
         records.push(record);
         var userUID= record.Id;
         //var websongit= record.isWebsiteOnGit__c;
@@ -39,7 +39,7 @@
         </a> `;
         paraNew.innerHTML = codeBlock2 ;
         divToAppend.appendChild(paraNew); */
-        console.log(userUID + " ; " + record.Mentee__c );
+        console.log(userUID + " ; " + record.Mentor_Name__c );
         /*console.log(websongit);
         console.log(age);
         console.log(GradeLevel);*/
