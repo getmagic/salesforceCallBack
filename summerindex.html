@@ -40,6 +40,7 @@
         paraNew.innerHTML = codeBlock2 ;
         divToAppend.appendChild(paraNew); */
         console.log(userUID + " ; " + record.menteeFirstName__c );
+        document.getElementById("writeHere").innerHTML+= userUID + " ; " + record.menteeFirstName__c;
         /*console.log(websongit);
         console.log(age);
         console.log(GradeLevel);*/
@@ -60,6 +61,7 @@
 </head>
 <body>
     <button onclick="jsforce.browser.login();">Login</button>
+    <p id="writeHere"></p>
     <!--<script src=""></script>-->
 </body>
 </html>
