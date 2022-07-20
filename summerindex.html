@@ -47,6 +47,7 @@
             
             console.log("record.Images__c: " + record.Images__c );
             var images= record.Images__c;
+            console.log("images: " + images);
             var myimg = images.getElementsByTagName('img')[0]; //grab the first img tag
             var source = myimg.src;
             console.log(source);
