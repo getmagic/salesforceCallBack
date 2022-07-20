@@ -42,10 +42,11 @@
         console.log(userUID + " ; " + record.menteeFirstName__c );
         document.getElementById("writeHere").innerHTML+= userUID + " ; " + record.menteeFirstName__c + "<br>";
           if (userUID=='a153i000002iiZMAAY'){
-            //document.getElementById("changeSrc").src=record.Images__c ;
-            
             //document.getElementById("writeHere").innerHTML+=record.Images__c ;
-            var source= record.Images__c.src;
+            
+            console.log("record.Images__c: " + record.Images__c );
+            var myimg = record.Images__c .getElementsByTagName('img')[0];
+            var source = myimg.src;
             console.log(source);
             document.getElementById("changeSrc").src=source ;
           }
