@@ -43,9 +43,11 @@
         document.getElementById("writeHere").innerHTML+= userUID + " ; " + record.menteeFirstName__c + "<br>";
           if (userUID=='a153i000002iiZMAAY'){
             //document.getElementById("writeHere").innerHTML+=record.Images__c ;
+            //the output is <p><img src=" "> </p>
             
             console.log("record.Images__c: " + record.Images__c );
-            var myimg = record.Images__c .getElementsByTagName('img')[0];
+            var images= record.Images__c;
+            var myimg = images.getElementsByTagName('img')[0]; //grab the first img tag
             var source = myimg.src;
             console.log(source);
             document.getElementById("changeSrc").src=source ;
