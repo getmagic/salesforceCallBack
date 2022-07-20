@@ -42,7 +42,8 @@
         console.log(userUID + " ; " + record.menteeFirstName__c );
         document.getElementById("writeHere").innerHTML+= userUID + " ; " + record.menteeFirstName__c + "<br>";
           if (userUID=='a153i000002iiZMAAY'){
-            document.getElementById("changeSrc").src=record.Images__c ;
+            //document.getElementById("changeSrc").src=record.Images__c ;
+            document.getElementById("writeHere").innerHTML+=record.Images__c ;
           }
         /*console.log(websongit);
         console.log(age);
