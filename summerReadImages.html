@@ -15,7 +15,7 @@
     jsforce.browser.on('connect', function(conn) {
         console.log("Your website has been connected!");
       var records = [];
-        var query = conn.query("SELECT Id, menteeFirstName__c, Images__c FROM Project__c").on("record", function(record) {
+        var query = conn.query("SELECT Id, firstName__c FROM MAGICMenteeProjects__c").on("record", function(record) {
         records.push(record);
         var userUID= record.Id;
         //var websongit= record.isWebsiteOnGit__c;
@@ -42,6 +42,8 @@
         divToAppend.appendChild(paraNew); */
         console.log(userUID + " ; " + record.menteeFirstName__c );
         document.getElementById("writeHere").innerHTML+= userUID + " ; " + record.menteeFirstName__c + "<br>";
+          
+          /*
           if (userUID=='a153i000002iiZMAAY'){
             //document.getElementById("writeHere").innerHTML+=record.Images__c ;
             //the output is <p><img src=" "> </p>
@@ -53,10 +55,8 @@
             var source = myimg.src;
             console.log(source);
             document.getElementById("changeSrc").src=source ;
-          }
-        /*console.log(websongit);
-        console.log(age);
-        console.log(GradeLevel);*/
+          }*/
+       
          
 
         })
@@ -75,6 +75,7 @@
 <body>
     <button onclick="jsforce.browser.login();">Login</button>
     <p id="writeHere"></p>
+  
    <img id="changeSrc" src="">
     <!--<script src=""></script>-->
 </body>
