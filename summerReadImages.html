@@ -32,14 +32,14 @@
       
       document.getElementById("writeHere").innerHTML+="<br> <br>";
       
-      var records_two = [];
+      var recordstwo = [];
       var querytwo = conn.query("SELECT Id, LinkedEntityId, ContentDocumentId,Visibility, IsDeleted, ShareType,ContentDocument.Title,ContentDocument.createdDate, ContentDocument.FileType FROM ContentDocumentLink WHERE LinkedEntityId ='a008c00000bVRMUAA4'")
-        .on("record", function(record__two) {
-          records_two.push(record_two);
-          console.log(record_two.ContentDocument.Title);
-          document.getElementById("writeHere").innerHTML+=record_two.ContentDocument.Title + "<br>";
-          console.log(record_two.ContentDocument.FileType);
-           document.getElementById("writeHere").innerHTML+=record_two.ContentDocument.FileType + "<br>";
+        .on("record", function(recordtwo) {
+          recordstwo.push(recordtwo);
+          console.log(recordtwo.ContentDocument.Title);
+          document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocument.Title + "<br>";
+          console.log(recordtwo.ContentDocument.FileType);
+           document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocument.FileType + "<br>";
         })
         .on("end", function() {
           console.log("total in database : " + querytwo.totalSize);
