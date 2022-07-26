@@ -2,4 +2,29 @@
     <apex:repeat value="{!files}" var="f">
         <apex:image url="/sfc/servlet.shepherd/version/download/{!f.ContentDocument.LatestPublishedVersionId}" width="400px"/>
     </apex:repeat>
+    
+    <html>
+<head>
+  <title> </title>
+  <!--<link rel="Stylesheet" href="your-css"/>-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.3.1/jsforce.min.js"></script>
+  <script>
+    jsforce.browser.init({
+      //of official salesforce clientId: '3MVG9vtcvGoeH2bgrxotygtXE9Z6nrYRYpLQdoNrbE_jsEbhyb_9nSkcccqx8zkFJGfQ0EPg9umtf3vbBkDqL', //client ID= consumer key of connected app
+      clientId: '3MVG9riCAn8HHkYWyDUteqZ_T5xUUpjPWGSgHayKnlQyuZyE36IMDHNU_z5dzsO1BFgdVowazpUM05sa8E.oX', //siya's salesforce
+      redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html', //redirectUri is the same as the callback URL of the connected app
+     });
+    
+    jsforce.browser.on('connect', function(conn) {
+        console.log("Your website has been connected!");
+        
+    }); //end of jsforce.browser.on('connect'...    
+</script>
+</head>
+<body>
+    <button onclick="jsforce.browser.login();">Login</button>
+</body>
+</html>
+    
 </apex:page>
