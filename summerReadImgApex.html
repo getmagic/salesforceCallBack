@@ -1,0 +1,15 @@
+public class FileViewerExtension {
+    public ID recordId {get;set;}
+    public list <ContentDocumentLink> files {set;get;}
+    
+    public FileViewerExtension(ApexPages.StandardController controller) {
+        recordId = System.currentPageReference().getParameters().get('id');
+        files = [SELECT Id, ContentDocumentId, ContentDocument.LatestPublishedVersionId, ContentDocument.LatestPublishedVersion.Title FROM ContentDocumentLink WHERE LinkedEntityId = :recordId];
+    }
+}
+    <!-- <apex:page standardController="YOUROBJECT__c" extensions="FileViewerExtension">-->
+      <apex:page standardController="MAGICMenteeProjects__c" extensions="FileViewerExtension">
+    <apex:repeat value="{!files}" var="f">
+        <apex:image url="/sfc/servlet.shepherd/version/download/{!f.ContentDocument.LatestPublishedVersionId}" width="150px"/>
+    </apex:repeat>
+</apex:page>
