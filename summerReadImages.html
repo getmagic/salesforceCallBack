@@ -29,6 +29,29 @@
         })
         .run({ autoFetch : true, maxFetch : 4000 }); // synonym of Query#execute();
       
+      
+      document.getElementById("writeHere").innerHTML+="<br> <br>";
+      
+      var records_two = [];
+      var query = conn.query("SELECT Id, LinkedEntityId, ContentDocumentId,Visibility, IsDeleted, ShareType,ContentDocument.Title,ContentDocument.createdDate, ContentDocument.FileType FROM ContentDocumentLink WHERE LinkedEntityId ='a008c00000bVRMUAA4'")
+        .on("record_two", function(record) {
+          records_two.push(record_two);
+          console.log(record_two.ContentDocument.Title);
+          document.getElementById("writeHere").innerHTML+=record_two.ContentDocument.Title + "<br>";
+          console.log(record_two.ContentDocument.FileType);
+           document.getElementById("writeHere").innerHTML+=record_two.ContentDocument.FileType + "<br>";
+        })
+        .on("end", function() {
+          console.log("total in database : " + query.totalSize);
+          console.log("total fetched : " + query.totalFetched);
+        })
+        .on("error", function(err) {
+          console.error(err);
+        })
+        .run({ autoFetch : true, maxFetch : 4000 }); // synonym of Query#execute();
+
+      
+      
     }); //end of jsforce.browser.on('connect'...    
 </script>
 </head>
