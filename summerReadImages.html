@@ -34,13 +34,14 @@
 
       
       var recordstwo = [];
-      var querytwo = conn.query("SELECT Id, LinkedEntityId, ContentDocumentId,Visibility, IsDeleted, ShareType,ContentDocument.Title,ContentDocument.createdDate, ContentDocument.FileType FROM ContentDocumentLink WHERE LinkedEntityId ='a008c00000bVRMUAA4'")
+      var querytwo = conn.query("SELECT Id, LinkedEntityId, ContentDocumentId,Visibility, IsDeleted, ShareType,ContentDocument.Title,ContentDocument.createdDate, ContentDocument.FileType, ContentDocument.LatestPublishedVersionId FROM ContentDocumentLink WHERE LinkedEntityId ='a008c00000bVRMUAA4'")
         .on("record", function(recordtwo) {
           recordstwo.push(recordtwo);
           console.log(recordtwo.ContentDocument.Title);
           document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocument.Title + "<br>";
           console.log(recordtwo.ContentDocument.FileType);
            document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocumentId + "<br>";
+          document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocument.LatestPublishedVersionId + "<br>";
           document.getElementById("writeHere").innerHTML+="<br>";
         })
         .on("end", function() {
