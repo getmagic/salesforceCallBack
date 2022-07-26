@@ -33,8 +33,8 @@
       document.getElementById("writeHere").innerHTML+="<br> <br>";
       
       var records_two = [];
-      var query = conn.query("SELECT Id, LinkedEntityId, ContentDocumentId,Visibility, IsDeleted, ShareType,ContentDocument.Title,ContentDocument.createdDate, ContentDocument.FileType FROM ContentDocumentLink WHERE LinkedEntityId ='a008c00000bVRMUAA4'")
-        .on("record_two", function(record) {
+      var querytwo = conn.query("SELECT Id, LinkedEntityId, ContentDocumentId,Visibility, IsDeleted, ShareType,ContentDocument.Title,ContentDocument.createdDate, ContentDocument.FileType FROM ContentDocumentLink WHERE LinkedEntityId ='a008c00000bVRMUAA4'")
+        .on("record", function(record__two) {
           records_two.push(record_two);
           console.log(record_two.ContentDocument.Title);
           document.getElementById("writeHere").innerHTML+=record_two.ContentDocument.Title + "<br>";
@@ -42,8 +42,8 @@
            document.getElementById("writeHere").innerHTML+=record_two.ContentDocument.FileType + "<br>";
         })
         .on("end", function() {
-          console.log("total in database : " + query.totalSize);
-          console.log("total fetched : " + query.totalFetched);
+          console.log("total in database : " + querytwo.totalSize);
+          console.log("total fetched : " + querytwo.totalFetched);
         })
         .on("error", function(err) {
           console.error(err);
