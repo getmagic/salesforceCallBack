@@ -6,7 +6,7 @@
     
     <apex:page showHeader="False" standardController="MAGICMenteeProjects__c" extensions="FileViewerExtension">
     <apex:repeat value="{!files}" var="f">
-        <apex:image url="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/{!f.ContentDocument.LatestPublishedVersionId}" width="400px"/>
+        <apex:image url="/sfc/servlet.shepherd/version/download/{!f.ContentDocument.LatestPublishedVersionId}" width="400px"/>
     </apex:repeat>
     
     <html>
