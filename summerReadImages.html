@@ -42,7 +42,8 @@
           console.log(recordtwo.ContentDocument.FileType);
            document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocumentId + "<br>";
           document.getElementById("writeHere").innerHTML+="THIS ONE: " + recordtwo.ContentDocument.LatestPublishedVersionId + "<br>";
-          document.getElementById("changeSrc").src="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/"+recordtwo.ContentDocument.LatestPublishedVersionId;
+          //document.getElementById("changeSrc").src="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/"+recordtwo.ContentDocument.LatestPublishedVersionId;
+          document.getElementById("changeSrc").src= "https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB120BY90&versionId="+recordtwo.ContentDocument.LatestPublishedVersionId+"&operationContext=CHATTER";
           document.getElementById("writeHere").innerHTML+="<br>";
         })
         .on("end", function() {
