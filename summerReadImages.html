@@ -42,6 +42,7 @@
           console.log(recordtwo.ContentDocument.FileType);
            document.getElementById("writeHere").innerHTML+=recordtwo.ContentDocumentId + "<br>";
           document.getElementById("writeHere").innerHTML+="THIS ONE: " + recordtwo.ContentDocument.LatestPublishedVersionId + "<br>";
+          document.getElementById("changeSrc").src="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/"+recordtwo.ContentDocument.LatestPublishedVersionId;
           document.getElementById("writeHere").innerHTML+="<br>";
         })
         .on("end", function() {
@@ -64,7 +65,7 @@
     <p id="writeHere"></p>
   
   <!--<img src="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/0688c000009mSTzAAM" alt="Girl in a jacket" width="500" height="600">-->
-  <img src="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/0688c000009mUEGAA2" alt="Girl in a jacket" width="500" height="600">
+  <!--<img src="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/0688c000009mUEGAA2" alt="Girl in a jacket" width="500" height="600">-->
   
  
   <apex:image url="/sfc/servlet.shepherd/document/download/0698c000009gpoCAAQ" alt="ImageOne" />
@@ -84,7 +85,7 @@
    <apex:image url="https://magic40-dev-ed--c.visualforce.com/sfc/servlet.shepherd/version/download/0688c000009mSTzAAM" width="400px" title="ImageSeven"/>
  
   
-   <img id="changeSrc" src="">
+   <img id="changeSrc" src="" alt="imgToChange">
     <!--<script src=""></script>-->
 </body>
 </html>
