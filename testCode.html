@@ -32,14 +32,16 @@ var query = conn.query("SELECT Id, Name, Body FROM ApexClass")
        console.log("executed? control: " + res.success); // executed successfully
        
         var apexBody= "<apex:page showHeader='False' standardController='MAGICMenteeProjects__c' extensions='" + records[0].Name+ "'> <apex:image url='/sfc/servlet.shepherd/version/download/0688c000009mSTzAAM' width='400px;'/> </apex:page>";
-        console.log(apexBody);  
+        document.getElementById("images").innerHTML=apexBody;
+     console.log(apexBody);  
+     /*
         conn.tooling.executeAnonymous(apexBody, function(err, res) {
 
             if (err) { return console.error(err); }
             console.log("compiled?: " + res.compiled); // compiled successfully
             console.log("executed?: " + res.success); // executed successfully
 
-        })
+        })*/
   })
   .on("error", function(err) {
     console.error(err);
