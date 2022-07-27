@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+ <html>
+   <script>
+     
+     jsforce.browser.init({
+      clientId: '3MVG9vtcvGoeH2bgrxotygtXE9Z6nrYRYpLQdoNrbE_jsEbhyb_9nSkcccqx8zkFJGfQ0EPg9umtf3vbBkDqL', //client ID= consumer key of connected app
+      redirectUri: 'https://getmagic.github.io/salesforceCallBack/authorization.html', //redirectUri is the same as the callback URL of the connected app
+     });
+    
+    jsforce.browser.on('connect', function(conn) {
+        console.log("Your website has been connected!");
+     
+var records = [];
+var query = conn.query("SELECT Id, Name, Body FROM ApexClass")
+  .on("record", function(record) {
+    records.push(record);
+    console.log(record.Name);
+    console.log(record.Id);
+    //console.log(record.Body);
+    console.log(" ");
+  })
+  .on("end", function() {
+    console.log("total in database : " + query.totalSize);
+    console.log("total fetched : " + query.totalFetched);
+    var controllerBody= records[0].Body;// execute anonymous Apex Code
+    console.log(controllerBody);
+    
+
+    conn.tooling.executeAnonymous(controllerBody, function(err, res) {
+       if (err) { return console.error(err); }
+       console.log("compiled? control: " + res.compiled); // compiled successfully
+       console.log("executed? control: " + res.success); // executed successfully
+       
+        var apexBody= "<apex:page showHeader='False' standardController='MAGICMenteeProjects__c' extensions='" + records[0].Name+ "'> <apex:image url='/sfc/servlet.shepherd/version/download/0688c000009mSTzAAM' width='400px;'/> </apex:page>";
+        console.log(apexBody);  
+        conn.tooling.executeAnonymous(apexBody, function(err, res) {
+
+            if (err) { return console.error(err); }
+            console.log("compiled?: " + res.compiled); // compiled successfully
+            console.log("executed?: " + res.success); // executed successfully
+
+        })
+  })
+  .on("error", function(err) {
+    console.error(err);
+  })
+  .run({ autoFetch : true, maxFetch : 4000 }); // synonym of Query#execute();
+ 
+}); //end of jsforce.browser.on('connect'...    
+
+
+
+});
+   </script>
+   <body>
+     <button onclick="jsforce.browser.login();">LOGIN</button>
+      <div id="images">
+       </div>
+   </body>
+</html>
+
+
+
+
+//</apex:page>
